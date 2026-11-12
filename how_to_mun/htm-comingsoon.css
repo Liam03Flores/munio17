@@ -1,0 +1,93 @@
+/* === RESETEO Y BASE === */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      height: 200vh; /* altura para poder hacer scroll */
+      background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+      overflow-x: hidden;
+    }
+
+    /* === CONTENEDOR PRINCIPAL === */
+    .scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      margin-top: 2vw;
+    }
+
+    /* === IMÁGEN CENTRAL === */
+    .center-img {
+      position: absolute;
+      width: 60vw;
+      height: auto;
+      z-index: 3;
+      filter: drop-shadow(0 0 1vw rgba(0, 0, 0, .3));
+    }
+
+    /* === IMÁGENES PERIFÉRICAS === */
+    .floating-img {
+      position: absolute;
+      width:72vw;
+      transition: transform 0.2s ease-out;
+      z-index: 2;
+    }
+
+    .top-left {
+      top: 8vw;
+      left: -20vw;
+    }
+
+   .top-right {
+      top: 8vw;
+      right: -8vw;
+    }
+
+    .bottom-left {
+      bottom: 8vw;
+      left: -8vw;
+    }
+
+    .bottom-right {
+      bottom: 8vw;
+      right: -15vw;
+    }
+
+  @media screen and (max-width: 750px) {
+    .scene {
+      margin-top: 12vw;
+    }
+    .center-img {
+      width: 110vw;
+      left: 45%;
+      transform: translate(-50%);
+    }
+
+    .floating-img {
+      width: 150vw;
+      min-width:460px;
+    }
+    .top-left {
+      top: 12%;
+      left: -70%;
+      position: absolute;
+    }
+
+   .top-right , .bottom-left {
+      display: none;
+    }
+
+    .bottom-right {
+      top: 70%;
+      right: -70%;
+    }
+
+  }

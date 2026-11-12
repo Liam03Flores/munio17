@@ -1,0 +1,84 @@
+
+/* === RESETEO Y BASE === */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+.org-t {
+  width: 94vw;
+  height: 100%;
+  display: block;
+  text-align: center;
+  margin: auto;
+  margin-top: 10vw;
+} 
+.org-t h2{
+  margin: auto;
+  width: 45vw;
+  font-size: 4vw;
+  color: #111666;
+  text-align: center;
+  margin-bottom: 1.8vw;
+}
+.org-t p{
+  width: 70vw;
+  text-align: justify; 
+  margin: auto;
+  font-size: 2vw;
+}
+.grid {
+  display: grid;
+  grid-template-columns:  auto auto;
+  margin: auto;
+  position: relative;
+  height: 100%;
+  margin-top: 20px;
+  margin-bottom: 10vw;
+}
+.cell {
+  position: relative;
+  height: 24vw;
+  padding-inline: 1.5vw;
+  padding-bottom: 1vw;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -15vw;
+}
+#right {
+  margin-top: 10vw; 
+  margin-bottom: -10vw;
+}
+.cell  img {
+  width: 44vw;
+  margin: auto;
+  border-radius: 1vw;
+  cursor: pointer;
+}
+
+@media (max-width: 750px){
+  .org-t h2{
+    font-size: 10vw;
+  }
+  .org-t p{
+    font-size: 3.5vw;
+    margin-bottom: 10vw;
+    width: 80vw;
+  }
+  .grid {
+    grid-template-columns: auto;
+    margin-top: 20px;
+  }
+.cell {
+    height: 53vw;
+    margin-block: -7vw;
+    /*margin-top: -9vw;
+    margin-bottom: -9vw;*/
+  }
+  #right {margin-top: -7vw;}
+
+.cell img {
+    width: 82vw;
+  }
+}

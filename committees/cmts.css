@@ -1,0 +1,205 @@
+    /* === BASE === */
+* {
+      box-sizing: border-box;
+}
+
+  body {
+    margin: 0;
+  }
+
+    section{
+      margin-bottom: 3vw;
+      text-align: center;
+  }
+
+    h1 {
+      color: #111666;
+      font-size: 2.8vw;
+      margin-bottom: 1vw;
+    }
+
+    /* === SLIDER === */
+    .slider {
+      position: relative;
+      width: 92vw;
+      height: 24vw;
+      margin:  auto;
+      overflow: hidden;
+      border-radius: 1vw;
+      /*border: .2vw solid;*/
+    }
+
+    .slide-track {
+      display: flex;
+      transition: transform 0.8s ease;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /*.slide_1 { background: #00171f; }
+    .slide_2 { background: #003459; }
+    .slide_3 { background: #007ea7; } cambiar cambiar
+    .slide_4 { background: #00a8e8; }
+    */
+
+    .slide-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0vw;
+      flex-wrap: wrap;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      /*border: 1px solid black;*/
+    }
+    .topics {width: 45vw;}
+    .chair { width: 35vw;}
+    .topics, .chair {
+      height: 24vw;
+      border-radius: 0.4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .topics p {
+      font-size: 2vw;
+      font-weight: 500;
+      text-align: justify;
+      color: black;
+      margin-bottom: 1vw;
+      margin-inline: 2vw;
+    }
+    #committee {
+      font-size: 1.8vw;
+      font-weight: 600;
+      text-align: center;
+      color: black;
+      margin-top: 0vw;
+      letter-spacing: 0.02vw; word-spacing: 0.4vw;
+    }
+    #smaller {
+      tab-size: 0.3vw;
+    }
+    /*.chair p {
+      font-size: 1.8vw;
+      font-weight: 600;
+      text-align: center;
+      color: black;
+      margin-top: 0vw;
+      letter-spacing: 0.02vw; word-spacing: 0.4vw;
+    }*/
+
+    .topics a img {
+      width: 60%;
+      height: auto;
+      border-radius: 0.5vw;
+    }
+    .topics #double{
+      text-align: center; 
+      display: inline-block;
+      width: 104%;
+      margin-left: 4vw;
+    }
+    .topics #double a img {
+      width: 48%;
+      height: auto;
+      border-radius: 0.5vw;
+    }
+
+    .chair img {
+      width: 75%;
+      margin-bottom: 0.2vw;
+      height: auto;
+      border-radius: 0.5vw;
+    }
+    #longer img{
+      width: 75%;
+    }
+    /* === FLECHAS === */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      /*background: aqua; cambiar cambiar*/
+      width: 3vw;
+      height: 24vw;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.6vw;
+      color: #00171f;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    .arrow.left {
+      left: 1vw;
+    }
+
+    .arrow.right {
+      right: 1vw;
+    }
+
+    /* === BULLETS === */
+    .bullets {
+      position: absolute;
+      bottom: 1.5vw;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1vw;
+    }
+
+    .bullets div {
+      width: 3vw;
+      height: 0.6vw;
+      border-radius: 1vw;
+      background: rgba(192, 30, 30, 0.4);    /*cambiar cambiar*/
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .bullets .active {
+      background: lightblue;
+      width: 4vw;
+    }
+
+   @media (max-width: 750px) {
+   .slider { height: 32vw;}
+    .topics {width: 35vw;}
+  #committee {
+    font-size: 2.2vw;
+  }
+  #smaller {
+    font-size: 1.7vw;
+  }
+    .topics p {
+      font-size: 2.1vw;
+    }
+    .chair { width: 45vw;}
+    /*
+      .topics, .chair {
+        width: 80vw;
+        height: auto;
+      }
+      .slide-content {
+        flex-direction: column;
+      }
+      .arrow {
+        width: 6vw;
+        height: 6vw;
+        font-size: 3vw;
+      }
+    }
+      */
+   }

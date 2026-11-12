@@ -1,0 +1,273 @@
+/* ================================
+   Global Reset & Basic Structure
+   ================================ */
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  color: #000;
+  overflow-x: hidden; 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 💡 Best Practice:
+   - Use a CSS reset (like Normalize.css or a universal reset) 
+     to ensure consistent styling across browsers.
+*/
+
+/* ================================
+   Header / Navigation Container
+   ================================ */
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: clamp(6rem, 12vw, 8rem); /* ⬜️ Sustituí 12vw por clamp() más adaptable */
+  width: 100%;
+  z-index: 4;
+}
+
+.bar {
+  width: 100%;
+  position: absolute;
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ================================
+   Navigation Bar
+   ================================ */
+
+.navbar {
+  position: absolute;
+  left: 51.4%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  width: 80vw;
+  top: 1vw;
+  padding: 0.3vw 3vw 1.2vw 3vw;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+
+.navbar a {
+  float: none;
+  display: block;
+  font-size: 1.7vw;
+  padding: 2vw 0.5vw;
+  color: white;
+  width: 15vw;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 100;
+  transition: color 0.3s;
+}
+
+#active {
+  text-decoration: underline solid white 0.4vw;
+  text-underline-offset: 0.6vw;
+}
+
+.navbar a:hover {
+  transform: scale(1.25);
+}
+
+/* ================================
+   Social Media Icons
+   ================================ */
+.smedia {
+  width: 5vw !important;
+}
+
+.centre {
+  width: 10.5vw !important; 
+}
+.smedia i {
+  font-size: 2.2vw;
+}
+
+/* ================================
+   Mobile Menu (Hamburger Menu)
+   ================================ */
+
+.menu-top {
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  height: 18vw; 
+  display: none;
+}
+.menu-top img {
+  position: absolute;
+  left: -5vw;
+  top: 52%;
+  transform: translateY(-50%);
+  width: 70vw;
+  z-index: 4;
+}
+
+.menu-top #icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5vw;
+  color: #15167D;
+  font-size: 12vw;
+  z-index: 4;
+}
+#small-navbar {
+  width: 95vw;
+  top: 1vw;
+  z-index: 3;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+/* ================================
+   Fullscreen Menu Overlay
+   ================================ */
+
+#menu {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: 0.5s;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.menu-content {
+  position: relative;
+  top: 12%;
+  width: 80%;
+  text-align: center;
+  margin: 30px auto 120px;
+}
+#menu a {
+  padding: 20px;
+  text-decoration: none;
+  font-size: 10vw;
+  font-weight: 500;
+  color: black;
+  display: block;
+  border-bottom: 1vw solid #254e9b;
+}
+
+#menu .sm {
+  background-color: transparent;
+  display: inline-flex;
+  margin-top: 50px;
+  padding: 25px;
+  border: none;
+}
+#icon {
+  display: flex;
+  z-index: 5;
+}
+
+#menu .closebtn {
+  position: absolute;
+  top: -1.5%;
+  right: 12%;
+  font-size: 60px;
+  width: 5%;
+  height: 10%;
+  z-index: 1;
+  border: none;
+}
+
+/* ================================
+   Footer Section
+   ================================ */
+
+footer {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 12vw;
+  margin-top: 5vw;
+  background-color: #324c8c;
+}
+footer section {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin:0;
+  gap: 10vw;
+}
+
+footer section a {
+  text-decoration: none;
+  color: white;
+  font-size: 2vw;
+}
+
+footer section img {
+  height: 8vw;
+}
+
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+@media screen and (max-width: 750px) {
+  .container {
+    display: none;
+  }
+
+  .menu-top {
+    display: flex;
+  }
+
+  footer {
+    flex-direction: column;
+    height: auto;
+    gap: 5vw;
+    padding: 5vw;
+  }
+
+  footer #aviso {
+    font-size: 4vw;
+    text-align: center;
+    margin: 0; /*Quitar margen puesto más arriba*/
+  }
+
+  footer #logos {
+    justify-content: center;
+    margin: 0; /*Quitar margen puesto más arriba*/
+  }
+
+  #logos img {
+    width: 30vw;
+    height: auto;
+  }
+
+}
+
+/* 💡 Best Practice:
+   - Define multiple breakpoints (not just one at 750px).
+   - Use rem-based media queries (e.g., 48rem, 64rem) for consistency with font scaling.
+*/

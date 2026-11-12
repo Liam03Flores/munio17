@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How To MUN | MUNIO</title>
+  <link rel="stylesheet" href="how_to_mun/htm2.css">
+  <style>
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      background-color: #111;
+      overflow-x: hidden;
+      padding-top: 60px;
+      transition: 1s;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+    }
+  </style>
+</head>
+<body>
+    <div id="mySidenav1" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeAll()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- SIDENAV 2 -->
+  <div id="mySidenav2" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeAll()">&times;</a>
+    <a href="#">Rebeca</a>
+    <a href="#">Alexa</a>
+    <a href="#">Lopez</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- SIDENAV 3 -->
+  <div id="mySidenav3" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeAll()">&times;</a>
+    <a href="#">Documentos</a>
+    <a href="#">Protocolos</a>
+    <a href="#">Guías</a>
+    <a href="#">Recursos</a>
+  </div>
+
+  <div class="container">
+    <!-- Resources section (LEFT) -->
+    <section class="resources">
+      <h1>Resources</h1>
+      <br>
+      <div class="grid">
+        <div class="card">
+          <span onclick="openNav('mySidenav1')">
+            <img src="how_to_mun/htm_photos/d_guide.png" alt="Delegates Guide">
+          </span>
+        </div>
+        <div class="card">
+          <span onclick="openNav('mySidenav2')">
+          <img src="how_to_mun/htm_photos/protocols.png" alt="Protocols">
+          </span>
+        </div>
+        <div class="card">
+          <span onclick="openNav('mySidenav3')">
+          <img src="how_to_mun/htm_photos/special_protcols.png" alt="Special Protocols">
+          </span>
+        </div>
+        <div class="card">
+          <span onclick="openNav('mySidenav4')">
+          <img src="how_to_mun/htm_photos/backgrounds.png" alt="Main Organs BGs">
+          </span>
+        </div>
+        <div class="card">
+          <span onclick="openNav('mySidenav5')">
+          <img src="" alt="United Nations BGs">
+          </span>
+        </div>  
+        <div class="card">
+          <span onclick="openNav('mySidenav5')">
+          <img src="how_to_mun/htm_photos/protocols.png" alt="Protocols">
+          </span>
+        </div>                       
+      </div>
+    </section>
+
+    <!-- Info section (RIGHT) -->
+    <section class="info">
+      <h1>How To MUN</h1>
+      <p>
+        Model United Nations (MUN) is an academic simulation where students take on the role of diplomats, representing different countries and debating global issues.
+        <br><br>
+        This guide is designed for new and experienced delegates who want to understand procedures, improve their performance, and make the most out of every conference.
+        <br><br>
+        Explore the resources, select your language, and start learning step by step.
+      </p>
+
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+    </section>
+    
+  </div>
+
+  <script>
+    function closeAll() {
+      document.getElementById("mySidenav1").style.width = "0";
+      document.getElementById("mySidenav2").style.width = "0";
+      document.getElementById("mySidenav3").style.width = "0";
+    }
+
+    function openNav(id) {
+      closeAll(); // cierra las otras SIN animación
+      document.getElementById(id).style.width = "50%";
+    }
+  </script>
+
+</body>
+</html>
