@@ -1,0 +1,25 @@
+/* styles/variables.css
+   Design tokens de MUNIO XVII (colores, fuentes, medidas).
+   Los HEX son estimaciones del logo: confirmar con el archivo vectorial original.
+   Cargado por: todas las páginas, ANTES de global.css y de cualquier otro CSS. */
+
+:root {
+  --munio-navy: #151B4F;                 /* tinta y acento de marca (estimado del logo) */
+  --munio-paper: #FDFCF9;                /* casi blanco cálido, estilo Reporter */
+  --munio-muted: #4B5078;                /* texto secundario */
+  --munio-line: rgb(21 27 79 / 0.32);    /* filetes finos */
+
+  --font-serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --max-w: 75rem;
+  --header-h: 4.25rem;
+  --header-offset: calc(var(--header-h) + 1px); /* alto del header + su filete */
+
+  color-scheme: light;
+}
+
+@media (min-width: 56rem) {
+  :root { --header-h: 4.75rem; }
+}

@@ -1,0 +1,99 @@
+/* pages/maintenance/maintenance.css
+   Página provisional "Under maintenance": fila de banderas -> mensaje -> fila de banderas.
+   Cargado por: pages/maintenance/maintenance.html. Usa tokens de styles/variables.css
+   y el botón .btn-primary de shared/css/components.css. */
+
+.maintenance {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);   /* evita que las filas de banderas ensanchen la página */
+  grid-template-rows: auto 1fr auto;
+  /* Pantalla menos header: el footer queda justo fuera de la vista (hay un scroll mínimo, natural) */
+  min-block-size: calc(100svh - var(--header-h));
+  color: var(--munio-navy);
+}
+
+/* ---------- Filas de banderas ---------- */
+.flags { padding-block: clamp(1rem, 3vw, 1.75rem); }
+.flags__viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.flags__track {
+  display: flex;
+  inline-size: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flags__item { flex: none; padding-inline: clamp(0.75rem, 1.6vw, 1.1rem); }
+.flags__item img {
+  display: block;
+  inline-size: clamp(4.25rem, 9vw, 5.25rem);
+  block-size: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-btn, 0.25rem);   /* misma esquina que los botones */
+}
+
+/* Cada grupo está duplicado: -50% <-> 0 da un bucle sin saltos */
+.flags__track--right { animation: flags-right 90s linear infinite; }
+.flags__track--left  { animation: flags-left 90s linear infinite; }
+@keyframes flags-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes flags-left  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .flags__track { animation: none; inline-size: auto; flex-wrap: wrap; justify-content: center; }
+  .flags__item[aria-hidden="true"] { display: none; }
+  .flags__viewport { mask-image: none; }
+}
+
+/* ---------- Mensaje ---------- */
+.maintenance__body {
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 5vw, 3rem) var(--gutter);
+}
+.maintenance__text {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  max-inline-size: 36rem;
+  text-align: center;
+}
+/* Todo el mensaje con un solo estilo (tamaño intermedio entre el antiguo título y párrafo) */
+.status__text {
+  margin: 0;
+  font: 400 clamp(1.25rem, 1rem + 1vw, 1.5rem)/1.45 var(--font-serif);
+  text-wrap: balance;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.social-links__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-block-size: 2.75rem;
+  color: inherit;
+  font: 500 1rem/1 var(--font-sans);
+  text-decoration: none;
+}
+.social-links__link:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+.social-links__link:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 3px; }
+.social-links__icon {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+

@@ -1,0 +1,22 @@
+/* shared/css/components.css
+   Componentes reutilizables entre páginas. Cargado por: todas las páginas que los usen.
+   Usa los tokens de styles/variables.css. */
+
+/* Esquina de botones (casi rectangular, no 100 % puntiaguda). También la usan las banderas. */
+:root { --radius-btn: 0.25rem; }
+
+/* Botón principal (azul marino). Se mueve aquí desde pages/home/home.css */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: 1.5rem;
+  border: 1px solid var(--munio-navy);
+  border-radius: var(--radius-btn);
+  background: var(--munio-navy);
+  color: var(--munio-paper);
+  font: 500 0.875rem/1 var(--font-sans);
+  text-decoration: none;
+}
+.btn-primary:hover { background: transparent; color: var(--munio-navy); }
+.btn-primary:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 3px; }

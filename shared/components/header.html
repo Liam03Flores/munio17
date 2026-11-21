@@ -1,0 +1,83 @@
+<!-- shared/components/header.html
+     Header global de MUNIO XVII (fragmento, NO es una página completa).
+     Lo inserta shared/js/include.js en el hueco <div data-include="shared/components/header.html">.
+     {{root}} se reemplaza por data-root del <html> de cada página:
+       index.html -> "./"      pages/<feature>/<pagina>.html -> "../../"
+     El enlace de la página actual (aria-current) lo marca include.js según la URL.
+     Estilos: shared/css/header.css · JS del buscador: shared/js/header.js -->
+<header class="site-header">
+  <div class="site-header__inner">
+
+    <!-- Logo = Home. PROVISIONAL: logo de la 16ª edición (el no circular) -->
+    <a class="site-header__brand" href="{{root}}index.html" aria-label="MUNIO, home">
+          <img class="site-header__logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 60'%3E%3Crect width='90' height='60' rx='4' fill='%23DDE1F0'/%3E%3Ctext x='45' y='36' text-anchor='middle' font-family='sans-serif' font-size='16' font-weight='700' fill='%23151B4F'%3ELOGO%3C/text%3E%3C/svg%3E" alt="MUNIO" width="90" height="60">  
+    </a>
+
+    <!-- Navegación principal (un solo <nav> para móvil y escritorio) -->
+    <nav class="site-nav" aria-label="Primary">
+      <button class="icon-btn site-nav__toggle" type="button"
+              popovertarget="site-menu" aria-controls="site-menu" aria-label="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <ul id="site-menu" class="site-nav__list" popover="auto">
+        <li class="site-nav__item"><a class="site-nav__link" href="{{root}}index.html">Home</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="{{root}}pages/maintenance/maintenance.html">Gallery</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="{{root}}pages/maintenance/maintenance.html">How to MUN</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="{{root}}pages/maintenance/maintenance.html">About Us</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="{{root}}pages/maintenance/maintenance.html">Committees</a></li>
+        <!-- Redes: solo visibles en el menú móvil (en escritorio van en el footer) -->
+        <li class="site-nav__social">
+          <a href="https://www.instagram.com/munio.official/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>
+            <span>@munio.official</span><span class="visually-hidden"> on Instagram (opens in a new tab)</span></a>
+          <a href="https://www.tiktok.com/@munio.official" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3c.4 2.6 2 4.4 4.8 4.6"/></svg>
+            <span>@munio.official</span><span class="visually-hidden"> on TikTok (opens in a new tab)</span></a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Acciones: lupa + Sign In -->
+    <div class="site-header__actions">
+      <button class="icon-btn" type="button"
+              popovertarget="site-search" aria-controls="site-search" aria-label="Search the site">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+
+      <div id="site-search" class="search" popover="auto">
+        <form role="search" action="#">
+          <label class="visually-hidden" for="site-search-input">Search the site</label>
+          <input id="site-search-input" class="search__input" type="search" name="q"
+                 placeholder="Search pages…" autocomplete="off" autofocus
+                 aria-controls="site-search-results">
+        </form>
+        <ul id="site-search-results" class="search__list">
+          <li class="search__item" data-keywords="home start lobby welcome main">
+            <a class="search__link" href="{{root}}index.html"><span class="search__title">Home</span><span class="search__desc">Welcome to MUNIO XVII</span></a>
+          </li>
+          <li class="search__item" data-keywords="photos pictures images memories events past editions">
+            <a class="search__link" href="{{root}}pages/maintenance/maintenance.htmll"><span class="search__title">Gallery</span><span class="search__desc">Photos from our events</span></a>
+          </li>
+          <li class="search__item" data-keywords="guide rules procedure tutorial delegates beginner learn">
+            <a class="search__link" href="{{root}}pages/maintenance/maintenance.html"><span class="search__title">How to MUN</span><span class="search__desc">Learn the rules and procedure</span></a>
+          </li>
+          <li class="search__item" data-keywords="team organizers staff leadership mission vision who we are">
+            <a class="search__link" href="{{root}}pages/maintenance/maintenance.html"><span class="search__title">About Us</span><span class="search__desc">Meet the organizing team</span></a>
+          </li>
+          <li class="search__item" data-keywords="committees debate topics delegations rooms">
+            <a class="search__link" href="{{root}}pages/maintenance/maintenance.html"><span class="search__title">Committees</span><span class="search__desc">Explore the committees</span></a>
+          </li>
+          <li class="search__item" data-keywords="login account delegate access">
+            <a class="search__link" href="{{root}}pages/maintenance/maintenance.html"><span class="search__title">Sign In</span><span class="search__desc">Access your account</span></a>
+          </li>
+        </ul>
+        <p class="search__empty" hidden>No pages match your search.</p>
+        <p class="visually-hidden" id="site-search-status" role="status"></p>
+      </div>
+
+      <a class="btn-outline" href="{{root}}pages/maintenance/maintenance.html">Sign In</a>
+    </div>
+
+  </div>
+</header>

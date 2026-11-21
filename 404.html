@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-root="./">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | MUNIO XVII</title>
+  <meta name="description" content="We could not find this page of the MUNIO XVII website.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#FDFCF9">
+
+  <!-- IMPORTANTE: GitHub Pages muestra este archivo en CUALQUIER URL inexistente
+       (por ejemplo /munio17/lo/que-sea), así que la profundidad de la ruta es impredecible.
+       <base> hace que TODAS las rutas relativas de esta página (css, js, imágenes, enlaces, fetch del header)
+       se resuelvan desde la raíz del sitio. Es la única línea que cambia entre entornos:
+         GitHub Pages (proyecto):   <base href="/munio17/">
+         Local / dominio propio:    <base href="/">  -->
+  <base href="/munio17/">
+
+  <link rel="icon" href="assets/logo-window.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="shared/css/header.css">
+  <link rel="stylesheet" href="shared/css/components.css">
+  <link rel="stylesheet" href="shared/css/footer.css">
+  <link rel="stylesheet" href="pages/error-404/error-404.css">
+
+  <script src="shared/js/include.js" defer></script>
+  <script src="shared/js/header.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div data-include="shared/components/header.html" class="header-slot"></div>
+
+  <main id="main" class="error">
+    <div class="error__inner">
+
+
+      <div class="error__body">
+        <h1 class="error__title">We are sorry, delegate.</h1>
+        <p class="error__text">We seem to have lost this page, but we do not want to lose you.</p>
+        <a class="btn-primary" href="index.html">Motion to continue browsing</a>
+      </div>
+
+      <figure class="error__media">
+        <!-- TODO: cambiar por la imagen real en pages/error-404/images/ -->
+        <img class="error__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23DDE1F0'/%3E%3Ctext x='300' y='312' text-anchor='middle' font-family='sans-serif' font-size='32' fill='%23151B4F'%3E404 image%3C/text%3E%3C/svg%3E"
+             alt="" width="600" height="600" decoding="async">
+      </figure>
+
+    </div>
+  </main>
+
+  <div data-include="shared/components/footer.html" class="footer-slot"></div>
+</body>
+</html>

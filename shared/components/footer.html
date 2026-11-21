@@ -1,0 +1,44 @@
+<!-- shared/components/footer.html
+     Footer global, partido en dos: MUNIO (izquierda) e Instituto Oriente (derecha).
+     Se carga con: <div data-include="shared/components/footer.html"></div> (include.js reemplaza {{root}}).
+     Estilos: shared/css/footer.css
+     TODO: logos blancos reales (assets/logo-munio-white.png y assets/logo-oriente-white.png),
+           usuarios/URLs reales de redes y la página del aviso de privacidad. -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <!-- MUNIO -->
+    <section class="site-footer__col" aria-labelledby="footer-munio">
+      <h2 id="footer-munio" class="visually-hidden">MUNIO</h2>
+      <img class="site-footer__logo" width="96" height="96" alt="MUNIO"
+           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='6' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Ctext x='48' y='54' text-anchor='middle' font-family='sans-serif' font-size='16' font-weight='700' fill='%23fff'%3EMUNIO%3C/text%3E%3C/svg%3E">
+      <div class="site-footer__links">
+        <ul class="site-footer__social">
+          <li><a class="site-footer__icon" href="https://www.instagram.com/munio.official/" target="_blank" rel="noopener noreferrer" aria-label="MUNIO on Instagram (opens in a new tab)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a></li>
+          <li><a class="site-footer__icon" href="https://www.tiktok.com/@munio.official" target="_blank" rel="noopener noreferrer" aria-label="MUNIO on TikTok (opens in a new tab)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3c.4 2.6 2 4.4 4.8 4.6"/></svg></a></li>
+        </ul>
+        <!-- <a class="site-footer__privacy" href="https://ioriente.edu.mx/es/privacy" target="_blank" rel="noopener noreferrer">Privacy notice<span class="visually-hidden"> (opens in a new tab)</span></a> -->
+        <a class="site-footer__privacy" href="{{root}}404.html">404 page (temporary)</a>
+      </div>
+    </section>
+
+    <!-- Instituto Oriente -->
+    <section class="site-footer__col" aria-labelledby="footer-school">
+      <h2 id="footer-school" class="visually-hidden">Instituto Oriente</h2>
+      <a class="site-footer__logo-link" href="https://ioriente.edu.mx/es" target="_blank" rel="noopener noreferrer" aria-label="Instituto Oriente website (opens in a new tab)"><img class="site-footer__logo" width="96" height="96" alt="Instituto Oriente"
+           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='6' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Ctext x='48' y='54' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23fff'%3EORIENTE%3C/text%3E%3C/svg%3E"></a>
+      <div class="site-footer__links">
+        <ul class="site-footer__social">
+          <li><a class="site-footer__icon" href="https://www.instagram.com/ioriente" target="_blank" rel="noopener noreferrer" aria-label="Instituto Oriente on Instagram (opens in a new tab)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a></li>
+          <li><a class="site-footer__icon" href="https://www.facebook.com/share/1T5Nr6gA9t/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Oriente on Facebook (opens in a new tab)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 21v-8h2.7l.5-3.2h-3.2V7.9c0-.9.4-1.6 1.7-1.6h1.6V3.5c-.3 0-1.3-.2-2.4-.2-2.5 0-4 1.5-4 4.1v2.4H8.5V13h2.9v8z"/></svg></a></li>
+        </ul>
+        <a class="site-footer__privacy" href="https://ioriente.edu.mx/es/privacy" target="_blank" rel="noopener noreferrer">Privacy notice<span class="visually-hidden"> (opens in a new tab)</span></a>
+      </div>
+    </section>
+
+  </div>
+</footer>

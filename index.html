@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-root="./">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MUNIO XVII | Home</title>
+  <meta name="description" content="MUNIO - The Model of the United Nations Instituto Oriente. Explore our mission, events, and join the discussion.">
+  <meta name="theme-color" content="#FDFCF9">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo-window.png" type="image/png">
+
+  <!-- Fuentes: serif (titulares y texto) + sans neutra (menú, etiquetas, botones).
+       Solo los pesos usados y display=swap para que el texto nunca quede invisible. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+
+  <!-- Estilos (el orden importa: tokens -> base -> componente -> página).
+       Las rutas son relativas a ESTE archivo (index.html en la raíz). -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="shared/css/header.css">
+  <link rel="stylesheet" href="shared/css/components.css">
+  <link rel="stylesheet" href="shared/css/footer.css">
+  <link rel="stylesheet" href="pages/home/home.css">
+
+  <!-- JS (solo shared/js/, según architecture.md). defer = no bloquea el render. -->
+  <script src="shared/js/include.js" defer></script>
+  <script src="shared/js/header.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== HEADER (componente compartido) =====================
+       include.js reemplaza este hueco por shared/components/header.html -->
+  <div data-include="shared/components/header.html" class="header-slot"></div>
+
+  <!-- ===================== HERO ===================== -->
+  <!-- El resto de las secciones de Home va dentro de este <main> -->
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+
+        <figure class="hero__media">
+          <!-- LCP: fetchpriority="high" y sin loading="lazy".
+               TODO: ajustar alt y width/height a la imagen real. -->
+        <img class="hero__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750'%3E%3Crect width='1200' height='750' fill='%23DDE1F0'/%3E%3Ctext x='600' y='385' text-anchor='middle' font-family='sans-serif' font-size='40' fill='%23151B4F'%3EHero photo%3C/text%3E%3C/svg%3E"
+            alt="MUNIO XVII hero photo (placeholder)"
+            width="1200" height="750" fetchpriority="high" decoding="async">
+          <!-- VIDEO (activar cuando esté listo): la imagen se ve 3 s y luego arranca el video.
+               Pasos: 1) quitar este comentario, 2) descomentar el CSS ".hero__media" / ".hero__video"
+               (en pages/home/home.css), 3) agregar al final de index.html:
+               <script src="shared/js/hero-video.js" defer></script>
+          <video class="hero__video" muted playsinline preload="metadata" aria-hidden="true"
+                 poster="pages/home/images/index-1.png">
+            <source src="pages/home/videos/hero.webm" type="video/webm">
+            <source src="pages/home/videos/hero.mp4" type="video/mp4">
+          </video>
+          -->
+        </figure>
+
+        <div class="hero__body">
+          <!-- <p class="hero__kicker">MUNIO XVII</p> -->
+          <h1 id="hero-title" class="hero__title">The Model of the United Nations Instituto Oriente</h1>
+          <p class="hero__byline">Puebla, Mexico · <span>Feb 8th, 9th &amp; 10th</span></p>
+          <p class="hero__deck">MUNIO unites bright minds with a shared goal: to understand the world, challenge its problems and build solutions through dialogue.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== SOCIAL MEDIA ===================== -->
+    <section class="social" aria-label="Social media">
+      <div class="social__inner">
+        <ul class="social__list">
+          <li><a class="social__link" href="https://www.instagram.com/munio.official/" target="_blank" rel="noopener noreferrer"><svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg><span>@munio.official</span><span class="visually-hidden"> on Instagram (opens in a new tab)</span></a></li>
+          <li><a class="social__link" href="https://www.tiktok.com/@munio.official" target="_blank" rel="noopener noreferrer"><svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3c.4 2.6 2 4.4 4.8 4.6"/></svg><span>@munio.official</span><span class="visually-hidden"> on TikTok (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== MORE ABOUT OUR MODEL ===================== -->
+    <!-- Estructura tipo revista: 2 notas medianas (comités y delegados) + 3 pequeñas.
+         Las notas no llevan enlace a propósito. TODO: cambiar placeholders por fotos reales
+         (pages/home/images/) y ajustar cada alt. -->
+    <section class="section model" aria-labelledby="model-title">
+      <div class="section__inner">
+                <header class="model__head">
+          <h2 id="model-title" class="section__title">More about our model</h2>
+          <!-- <p class="model__intro">Our committees, delegates, speakers and the reputation behind MUNIO.</p> -->
+        </header>
+        <div class="model__grid">
+
+
+          <!-- Mediana 1: comités -->
+          <article class="card card--medium model__committees">
+            <figure class="card__media">
+              <img class="card__img" loading="lazy" decoding="async" width="900" height="1125"
+                   alt="Delegates in a committee session (placeholder)"
+                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Crect width='4' height='5' fill='%23DDE1F0'/%3E%3Ctext x='2.0' y='2.58' text-anchor='middle' font-family='sans-serif' font-size='0.24' fill='%23151B4F'%3ECommittees%20photo%3C/text%3E%3C/svg%3E">
+            </figure>
+            <!-- <p class="card__meta">Committees</p> -->
+            <h3 class="card__title">13 committees</h3>
+            <p class="card__deck">Delegates debate global challenges in 9 committees in English, 3 in Spanish and 1 in French.</p>
+          </article>
+
+          <!-- Mediana 2: delegados -->
+          <article class="card card--medium model__delegates">
+            <figure class="card__media">
+              <img class="card__img" loading="lazy" decoding="async" width="1200" height="900"
+                   alt="Delegates raising their placards (placeholder)"
+                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23DDE1F0'/%3E%3Ctext x='2.0' y='1.5666666666666667' text-anchor='middle' font-family='sans-serif' font-size='0.2' fill='%23151B4F'%3EDelegates%20photo%3C/text%3E%3C/svg%3E">
+            </figure>
+            <div class="card__text">
+              <p class="card__meta">Delegates</p>
+              <h3 class="card__title">More than 400 delegates</h3>
+              <p class="card__deck">Students from different high schools across Puebla take on the role of delegates to debate global issues and negotiate solutions together.</p>
+            </div>
+          </article>
+
+          <!-- 3 pequeñas -->
+          <div class="model__small">
+          <article class="card card--small">
+            <figure class="card__media">
+              <img class="card__img" loading="lazy" decoding="async" width="800" height="600"
+                   alt="Delegates debating (placeholder)"
+                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23DDE1F0'/%3E%3Ctext x='2.0' y='1.5666666666666667' text-anchor='middle' font-family='sans-serif' font-size='0.2' fill='%23151B4F'%3EDebate%20photo%3C/text%3E%3C/svg%3E">
+            </figure>
+            <div class="card__text">
+              <p class="card__meta">Feb 8th, 9th &amp; 10th</p>
+              <h3 class="card__title">Three days of debate, negotiation and resolutions</h3>
+            </div>
+          </article>
+          <article class="card card--small">
+            <figure class="card__media">
+              <img class="card__img" loading="lazy" decoding="async" width="800" height="600"
+                   alt="The organizing team and delegates (placeholder)"
+                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23DDE1F0'/%3E%3Ctext x='2.0' y='1.5666666666666667' text-anchor='middle' font-family='sans-serif' font-size='0.2' fill='%23151B4F'%3ERecognition%20photo%3C/text%3E%3C/svg%3E">
+            </figure>
+            <div class="card__text">
+              <p class="card__meta">Recognition</p>
+              <h3 class="card__title">Sponsored by the top best universities in Puebla</h3>
+            </div>
+          </article>
+          <article class="card card--small">
+            <figure class="card__media">
+              <img class="card__img" loading="lazy" decoding="async" width="800" height="600"
+                   alt="A speaker addressing the delegates (placeholder)"
+                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23DDE1F0'/%3E%3Ctext x='2.0' y='1.5666666666666667' text-anchor='middle' font-family='sans-serif' font-size='0.2' fill='%23151B4F'%3ESpeaker%20photo%3C/text%3E%3C/svg%3E">
+            </figure>
+            <div class="card__text">
+              <p class="card__meta">Speakers</p>
+              <!-- TODO: cambiar [##] por el número real de ponentes -->
+              <h3 class="card__title">+ 10 guest speakers share their experience with the delegates</h3>
+            </div>
+          </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REGISTER (CTA) ===================== -->
+    <!-- TODO: crear pages/register/register.html (el botón ya apunta ahí) y cambiar la foto. -->
+    <section class="section register" aria-labelledby="register-title">
+      <div class="section__inner register__inner">
+        <div class="register__body">
+          <p class="card__meta">Delegate registration</p>
+          <h2 id="register-title" class="register__title">Be part of MUNIO XVII</h2>
+          <p class="register__text">Register as a delegate, choose your three preferred committees and wait for your placement confirmation by email.</p>
+          <a class="btn-primary" href="pages/maintenance/maintenance.html">Register now</a>
+        </div>
+        <figure class="register__media">
+          <img class="register__img" loading="lazy" decoding="async" width="900" height="1200"
+               alt="A delegate speaking at a past MUNIO (placeholder)"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3Crect width='3' height='4' fill='%23DDE1F0'/%3E%3Ctext x='1.5' y='2.066666666666667' text-anchor='middle' font-family='sans-serif' font-size='0.2' fill='%23151B4F'%3ERegister%20photo%3C/text%3E%3C/svg%3E">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== MISIÓN Y VISIÓN ===================== -->
+    <section class="section about" aria-label="Mission and vision">
+      <div class="section__inner about__grid">
+        <article class="about__col" id="mission">
+          <h2 class="section__title">Mission</h2>
+          <p class="about__text">MUNIO seeks to transform the world through youth by fostering debate, discipline, empathy and teamwork. Through simulated United Nations debates, delegates raise awareness about global challenges and propose solutions. In this way, MUNIO goes beyond academics and inspires future generations.</p>
+        </article>
+
+        <article class="about__col" id="vision">
+          <h2 class="section__title">Vision</h2>
+          <p class="about__text">MUNIO aims to be recognized in Puebla and nationally, strengthening its prestige after 16 years of continuous improvement. In the short term, it seeks to increase student participation and build academic and professional skills. In the long term, it aspires to a just society where, guided by Jesuit values, life is oriented toward service and responsibility to others.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== FAQs ===================== -->
+    <!-- Acordeón nativo (<details>), sin JavaScript. 3 preguntas visibles y 3 más dentro de "More questions".
+         TODO: cambiar XXX por el costo real y el correo mun@example.com por el oficial. -->
+    <section class="section faq" aria-labelledby="faq-title">
+      <div class="section__inner faq__grid">
+        <div class="faq__intro">
+          <h2 id="faq-title" class="section__title">FAQs</h2>
+          <p class="faq__text">Here are some frequently asked questions about the model. If you have a specific question, you can always contact us by email at <a href="mailto:mun@example.com">mun@example.com</a>.</p>
+        </div>
+
+        <div class="faq__list">
+            <details class="faq__item">
+              <summary>Can I register if I attend a different high school?</summary>
+              <div class="faq__answer"><p>Yes. In fact, most of our delegates come from different high schools across Puebla.</p></div>
+            </details>
+            <details class="faq__item">
+              <summary>Where can I find the dress code and procedure documents?</summary>
+              <div class="faq__answer"><p>In the <a href="pages/maintenance/maintenance.html">How to MUN</a> section you will find all the official documents of the model.</p></div>
+            </details>
+            <details class="faq__item">
+              <summary>How much does it cost and what does it include?</summary>
+              <div class="faq__answer"><p>The registration fee is 500 MXN. It includes your delegate kit and full access to the model, including the coffee breaks and the Public Session.</p></div>
+            </details>
+
+          <details class="faq__more">
+            <summary>More questions</summary>
+            <details class="faq__item">
+              <summary>Do I need previous MUN experience?</summary>
+              <div class="faq__answer"><p>No. Many delegates attend their first model with us. The How to MUN section explains the basics so you can arrive prepared.</p></div>
+            </details>
+            <details class="faq__item">
+              <summary>How do I prepare for my committee?</summary>
+              <div class="faq__answer"><p>Research the country or role you will represent, learn about your committee’s topics and review the rules of procedure before the event.</p></div>
+            </details>
+            <details class="faq__item">
+              <summary>How are committees assigned?</summary>
+              <div class="faq__answer"><p>When you register, you choose three committee options. The organizing team will assign your placement and confirm it by email.</p></div>
+            </details>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SPONSORS ===================== -->
+    <!-- Franja delgada que se mueve lentamente de izquierda a derecha. Los logos van duplicados
+         (el segundo grupo es aria-hidden) para que el bucle no tenga saltos.
+         TODO: reemplazar los logos temporales; si cambias la cantidad, mantén ambos grupos iguales. -->
+    <section class="sponsors" aria-labelledby="sponsors-title">
+      <h2 id="sponsors-title" class="sponsors__label">Our sponsors</h2>
+      <div class="sponsors__viewport">
+        <ul class="sponsors__track">
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%201%3C/text%3E%3C/svg%3E" alt="Sponsor 1 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%202%3C/text%3E%3C/svg%3E" alt="Sponsor 2 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%203%3C/text%3E%3C/svg%3E" alt="Sponsor 3 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%204%3C/text%3E%3C/svg%3E" alt="Sponsor 4 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%205%3C/text%3E%3C/svg%3E" alt="Sponsor 5 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%206%3C/text%3E%3C/svg%3E" alt="Sponsor 6 logo (placeholder)" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%201%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%202%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%203%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%204%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%205%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+              <li class="sponsors__item" aria-hidden="true"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 56'%3E%3Crect width='160' height='56' fill='%23E6E8F2'/%3E%3Ctext x='80.0' y='33.333333333333336' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23151B4F'%3ELOGO%206%3C/text%3E%3C/svg%3E" alt="" width="160" height="56" loading="lazy" decoding="async"></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer global (lo inserta include.js) -->
+  <div data-include="shared/components/footer.html" class="footer-slot"></div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Carpetas privadas o de trabajo (no se publican)
+zz_moodboard/
+zz_munio16/
+zz_sandbox/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencias, logs y secretos
+node_modules/
+*.log
+.env
+.env.*
+
+# Archivos de trabajo que no son parte del sitio
+*.zip
+*.psd
+*.ai
+*.fig
+*.tmp

@@ -1,0 +1,292 @@
+/* shared/css/header.css
+   Header global (referencia: Reporter): logo, menú, buscador y Sign In.
+   Cargado por: todas las páginas. Usa los tokens de styles/variables.css.
+   Móvil: [logo ........ lupa  Sign In  menú]
+   Escritorio: [logo]  [Home  Gallery  How to MUN  About Us  Committees]  [lupa  Sign In] */
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  background: var(--munio-paper);
+  border-block-end: 1px solid var(--munio-line);
+  color: var(--munio-navy);
+  font-family: var(--font-sans);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-inline-size: var(--max-w);
+  min-block-size: var(--header-h);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-end: auto;
+}
+
+.site-header__logo {
+  display: block;
+  block-size: 2.75rem;
+  inline-size: auto;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  order: 2;
+}
+
+.site-nav { order: 3; }
+
+.site-header :focus-visible {
+  outline: 2px solid var(--munio-navy);
+  outline-offset: 3px;
+}
+
+/* Botón de ícono (lupa, menú) */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.icon-btn:hover { background: rgb(21 27 79 / 0.07); }
+.icon-btn svg {
+  inline-size: 1.375rem;
+  block-size: 1.375rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Botón con contorno (Sign In), como "Subscribe" de Reporter */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.5rem;
+  padding-inline: 1.1rem;
+  border: 1px solid var(--munio-navy);
+  border-radius: var(--radius-btn);
+  color: var(--munio-navy);
+  font: 500 0.8125rem/1 var(--font-sans);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  background: var(--munio-navy);
+  color: var(--munio-paper);
+}
+
+/* Enlaces del menú (base = móvil) */
+.site-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-nav__item { border-block-end: 1px solid var(--munio-line); }
+.site-nav__link {
+  display: block;
+  padding-block: 0.9rem;
+  color: inherit;
+  font: 400 1.375rem/1.2 var(--font-serif);
+  text-decoration: none;
+}
+.site-nav__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.4em;
+}
+/* Página actual: subrayado grueso (no depende solo del color) */
+.site-nav__link[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
+}
+
+/* Redes sociales: solo en el menú móvil */
+.site-nav__social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 2rem;
+  padding-block: 0.75rem 0.25rem;
+}
+.site-nav__social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-block-size: 2.75rem;
+  color: inherit;
+  font: 500 1rem/1 var(--font-sans);
+  text-decoration: none;
+}
+.site-nav__social svg {
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Móvil: la lista es un popover a todo el ancho bajo el header ----- */
+@media (max-width: 55.9375rem) {
+  .site-nav__list {
+    position: fixed;
+    inset: var(--header-offset) 0 auto 0;
+    margin: 0;
+    inline-size: 100%;
+    max-inline-size: none;
+    block-size: fit-content;
+    max-block-size: calc(100dvh - var(--header-offset));
+    overflow: auto;
+    padding: 0.25rem var(--gutter) 1.5rem;
+    border: 0;
+    border-block-end: 1px solid var(--munio-line);
+    background: var(--munio-paper);
+    color: var(--munio-navy);
+    opacity: 0;
+    translate: 0 -0.5rem;
+  }
+  .site-nav__list:is(:popover-open, .\:popover-open) {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .site-nav__list::backdrop { background: rgb(21 27 79 / 0.25); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav__list {
+      transition: opacity 0.2s ease, translate 0.2s ease, display 0.2s, overlay 0.2s;
+      transition-behavior: allow-discrete;
+    }
+  }
+  @starting-style {
+    .site-nav__list:popover-open { opacity: 0; translate: 0 -0.5rem; }
+  }
+}
+
+/* ----- Escritorio: la misma lista se muestra en línea, centrada ----- */
+@media (min-width: 56rem) {
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1.5rem;
+  }
+  .site-header__brand { grid-column: 1; justify-self: start; margin-inline-end: 0; }
+  .site-nav { grid-column: 2; order: 0; }
+  .site-header__actions { grid-column: 3; justify-self: end; order: 0; gap: 0.5rem; }
+  .site-header__logo { block-size: 3.25rem; }
+
+  .site-nav__toggle { display: none; }
+
+  /* Anula los estilos por defecto del navegador para [popover] */
+  .site-nav__list {
+    position: static;
+    inset: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inline-size: auto;
+    max-inline-size: none;
+    block-size: auto;
+    max-block-size: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+  }
+  .site-nav__item { display: flex; align-items: center; border: 0; }
+  /* Punto separador entre páginas (decorativo; el texto alternativo vacío lo oculta a lectores de pantalla) */
+  .site-nav__item + .site-nav__item::before {
+    content: "·" / "";
+    margin-inline: clamp(1.25rem, 3vw, 2.25rem);
+    font: 700 1.25rem/1 var(--font-sans);
+  }
+  .site-nav__link {
+    padding-block: 0.5rem;
+    font: 500 0.75rem/1 var(--font-sans);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .site-nav__social { display: none; }
+}
+
+/* ----- Panel de búsqueda (popover) ----- */
+.search {
+  position: fixed;
+  inset: calc(var(--header-offset) + 0.5rem) 0 auto 0;
+  margin: 0 auto;
+  inline-size: min(36rem, calc(100% - 2 * var(--gutter)));
+  block-size: fit-content;
+  max-block-size: calc(100dvh - var(--header-offset) - 1rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--munio-line);
+  border-radius: 0.5rem;
+  background: var(--munio-paper);
+  color: var(--munio-navy);
+  box-shadow: 0 1rem 2.5rem rgb(21 27 79 / 0.14);
+  font-family: var(--font-sans);
+}
+.search::backdrop { background: rgb(21 27 79 / 0.25); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .search {
+    opacity: 0;
+    translate: 0 -0.5rem;
+    transition: opacity 0.2s ease, translate 0.2s ease, display 0.2s, overlay 0.2s;
+    transition-behavior: allow-discrete;
+  }
+  .search:is(:popover-open, .\:popover-open) { opacity: 1; translate: 0 0; }
+  @starting-style {
+    .search:popover-open { opacity: 0; translate: 0 -0.5rem; }
+  }
+}
+
+.search__input {
+  inline-size: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--munio-navy);
+  border-radius: 0.375rem;
+  background: #fff;
+  color: var(--munio-navy);
+  font: 400 1rem/1.4 var(--font-sans); /* 16 px: evita el zoom automático en iOS */
+}
+.search__input:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 2px; }
+
+.search__list { margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.search__link {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.5rem;
+  border-radius: 0.375rem;
+  color: inherit;
+  text-decoration: none;
+}
+.search__link:hover,
+.search__link:focus-visible { background: rgb(21 27 79 / 0.07); }
+.search__title { font: 400 1.125rem/1.2 var(--font-serif); }
+.search__desc { color: var(--munio-muted); font: 400 0.8125rem/1.3 var(--font-sans); }
+.search__empty { margin: 0.75rem 0 0; padding: 0.5rem; color: var(--munio-muted); font-size: 0.875rem; }
+.search [hidden] { display: none; }
+
+/* Mientras include.js carga el header, el hueco reserva su altura para que la página no salte */
+.header-slot { min-block-size: var(--header-h); }
