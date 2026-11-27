@@ -1,529 +1,397 @@
 # MUNIO XVII — Architecture Guide
- 
+
 **Project:** MUNIO XVII Website  
 **Institution:** Instituto Oriente, Puebla, Mexico  
 **Architecture:** Feature-Based + Shared Components + Hybrid Assets  
 **Stack:** HTML5, CSS3, Minimal JavaScript  
-**Deployment:** GitHub Pages  
+**Deployment:** GitHub Pages (`https://liam03flores.github.io/munio17/`)  
+**Repository:** `https://github.com/Liam03Flores/munio17`  
 **Status:** Approved  
-**Version:** 1.1  
-**Last updated:** November 17, 2026
- 
+**Version:** 1.2  
+**Last updated:** November 21, 2026
+
 ---
- 
+
 ## 1. Architecture Overview
- 
+
 MUNIO XVII follows a Feature-Based architecture designed to keep the project organized, maintainable, and easy to debug.
- 
-The website is divided into five main responsibilities:
- 
+
+The website is divided into five responsibilities:
+
 1. **Pages:** Independent website sections and their resources.
-2. **Shared:** Reusable components and centralized JavaScript.
+2. **Shared:** Reusable components, their CSS, and all JavaScript.
 3. **Assets:** Shared visual resources.
-4. **Styles:** Global visual foundations.
+4. **Styles:** Global visual foundations (design tokens).
 5. **Docs:** Technical documentation and design references.
-The project prioritizes simplicity over unnecessary technical complexity.
- 
-It remains a static website built with HTML5, CSS3, and minimal JavaScript.
- 
-No frontend framework is required.
- 
+
+It is a static website: HTML5, CSS3, and minimal JavaScript. No frontend framework, no build step.
+
 ## 2. Current Directory Structure
- 
-The following represents the approved project organization.
- 
+
 ```text
 MUNIO_website/
 │
 ├── .vscode/
 │   └── launch.json
 │
-├── assets/
+├── assets/                      (shared logos and images; optimized, see section 6)
 │   ├── elements/
 │   ├── logos/
-│   ├── 16-navbar.png
-│   ├── Logo_IO.png
-│   ├── logo_MUNIO.png
-│   ├── logo-16.png
-│   ├── logo-window.png
-│   └── logo.png
+│   └── logo-16.png ...          (provisional logos)
 │
 ├── docs/
-│   ├── references/
+│   ├── references/              (light references only; heavy files stay in zz_moodboard/)
 │   ├── architecture.md
-│   ├── design-system.md
+│   ├── design-system.md         (this project's M_17_Design.md)
 │   └── notes.md
 │
 ├── pages/
-│   ├── about-us/
-│   │   ├── images/
-│   │   ├── about-us.css
-│   │   └── about-us.html
-│   │
-│   ├── committees/
-│   │   ├── docs/
-│   │   ├── images/
-│   │   ├── committees.css
-│   │   └── committees.html
-│   │
-│   ├── gallery/
-│   │   ├── images/
-│   │   ├── gallery.css
-│   │   └── gallery.html
-│   │
+│   ├── error-404/
+│   │   └── error-404.css        (no HTML: the page is the root 404.html)
+│   ├── maintenance/
+│   │   ├── images/flags/        (20 SVG flags + LICENSE-flag-icons.txt)
+│   │   ├── maintenance.css
+│   │   └── maintenance.html
 │   ├── home/
 │   │   ├── images/
-│   │   └── home.css
-│   │
-│   ├── how-to-mun/
-│   │   ├── docs/
-│   │   ├── images/
-│   │   ├── how-to-mun.css
-│   │   └── how-to-mun.html
-│   │
-│   └── sign-in/
-│       ├── sign-in.css
-│       └── sign-in.html
+│   │   └── home.css             (its HTML is the root index.html)
+│   ├── gallery/                 (planned: gallery.html, gallery.css, images/)
+│   ├── how-to-mun/              (planned)
+│   ├── about-us/                (planned)
+│   ├── committees/              (planned)
+│   ├── register/                (planned: register.html)
+│   └── sign-in/                 (planned)
 │
 ├── shared/
 │   ├── components/
-│   │   ├── footer.html
-│   │   └── header.html
-│   │
+│   │   ├── header.html
+│   │   └── footer.html
 │   ├── css/
-│   │   ├── components.css
-│   │   ├── footer.css
-│   │   └── header.css
-│   │
-│   └── js/                  (JavaScript only; see section 13 for pending cleanup)
+│   │   ├── components.css       (shared UI pieces: .btn-primary, --radius-btn)
+│   │   ├── header.css
+│   │   └── footer.css
+│   └── js/
+│       ├── include.js           (loads header/footer into the page)
+│       ├── header.js            (popover polyfill + search)
+│       └── hero-video.js        (inactive; hero video is commented out)
 │
 ├── styles/
-│   ├── global.css
-│   ├── typography.css
-│   └── variables.css
+│   ├── variables.css            (design tokens; linked by every page)
+│   ├── global.css               (empty, not linked yet)
+│   └── typography.css           (empty, not linked yet)
 │
-├── zz_ignore/               (local test files; never part of the website)
-│   ├── zz.ignore
-│   ├── zzall.photos/
-│   ├── joker.html
-│   └── nb_footer.css
+├── zz_moodboard/                (IGNORED by git: references, originals, PDFs)
+├── zz_munio16/                  (IGNORED by git: previous edition's code)
+├── zz_sandbox/                  (IGNORED by git: tests and scratch files)
 │
-├── .gitignore               (file, in the root)
-├── index.html
+├── .gitignore
+├── 404.html                     (root; required by GitHub Pages)
+├── index.html                   (Home)
 └── README.md
 ```
- 
-**Note:** Some feature folders (`elements/`, `logos/`, `references/`, `docs/`, `images/`) are collapsed in the project explorer. Their internal contents are not specified here. This document does not assume that additional files already exist.
- 
-`.gitignore` is a file in the project root. `zz_ignore/` is a separate folder that holds local test files (`joker.html`, `nb_footer.css`, `zzall.photos/`, `zz.ignore`). It is not part of the website. Nothing in the website may reference a file inside `zz_ignore/`.
- 
+
+**Rules for this tree**
+
+- Folders marked *planned* do not exist until their page is built. Do not create empty folders.
+- `zz_*` folders are local only. Nothing in the website may reference a file inside them. They have **no backup in GitHub**: keep an external copy.
+- `docs/` can hold lightweight Markdown; heavy references (PDFs, large images) live in `zz_moodboard/`.
+
 ## 3. Directory Responsibilities
- 
-### 3.1 Root Directory
- 
-The root contains the website entry point and project configuration.
- 
-- `index.html`: Main website entry point and Home page.
-- `README.md`: Project introduction and general instructions.
-- `.gitignore`: Git exclusion rules, as a root-level file.
-- `zz_ignore/`: Local test and scratch files. It must be listed in `.gitignore` if its contents should not be published.
-- `.vscode/`: Local VS Code configuration.
-Keep `index.html` in the root to maintain compatibility with GitHub Pages.
- 
+
+### 3.1 Root
+
+- `index.html`: Home page and main entry point.
+- `404.html`: Error page. It must be in the root: GitHub Pages serves it automatically for any missing URL. See section 9.
+- `README.md`: Project introduction and run/deploy instructions.
+- `.gitignore`: lists `zz_moodboard/`, `zz_munio16/`, `zz_sandbox/`.
+
 ### 3.2 assets/
- 
-Contains shared visual resources used by multiple website sections.
- 
-- `logos/`: Official MUNIO and Instituto Oriente brand assets.
-- `elements/`: Reusable visual elements.
-- Root-level images: Existing shared image resources.
-Asset classification follows the Hybrid Asset approach:
- 
-**Global assets:** Resources used by multiple features belong in `assets/`.
- 
-**Feature-specific assets:** Resources exclusively used by one feature belong in that feature's `images/` directory.
- 
-Do not duplicate identical image files across different directories.
- 
+
+Shared visual resources used by several sections (logos, brand elements). Feature-only images go in that feature's `images/`. Do not duplicate identical files.
+
 ### 3.3 pages/
- 
-Contains the website's independent features.
- 
-Each feature owns its HTML content, CSS presentation, and exclusive images. The exception is Home: its HTML is the root `index.html`, and its CSS and images live in `pages/home/`.
- 
-Current features:
- 
-- `home/`: Main landing page resources.
-- `gallery/`: Event photographs and gallery content.
-- `committees/`: Committee information and related content.
-- `how-to-mun/`: Educational information about Model United Nations.
-- `about-us/`: Organization, mission, and team information.
-- `sign-in/`: User authentication interface.
-The main Home HTML remains `index.html` in the root. Its supporting resources are located in `pages/home/`.
- 
-Each feature must remain independent and should not contain resources belonging exclusively to another feature.
- 
-**Hero video (open decision):** Home may add a hero video after the opening image. The architecture has no `videos/` folder yet. Either store the video in `pages/home/images/` or approve and document a `pages/home/videos/` folder (see section 13).
- 
-**JavaScript exception:** Feature-specific JavaScript must not be stored inside individual page folders. All necessary JavaScript is centralized in `shared/js/`.
- 
+
+Each feature owns its HTML, its CSS and its exclusive images. Exceptions: Home (HTML is root `index.html`) and Error 404 (HTML is root `404.html`). Features must not contain resources that belong to another feature.
+
+**JavaScript exception:** no JS inside page folders; all JS is in `shared/js/`.
+
 ### 3.4 shared/
- 
-Contains resources and components reused across multiple website sections.
- 
-This directory has three responsibilities:
- 
-**components/**
- 
-Contains reusable HTML components.
- 
-- `header.html`: Canonical website Header.
-- `footer.html`: Canonical website Footer.
-**css/**
- 
-Contains styles specific to shared components.
- 
-- `header.css`: Header presentation.
-- `footer.css`: Footer presentation.
-- Additional shared component styles when necessary.
-**js/**
- 
-Contains all JavaScript used by the website.
- 
-Both global and feature-specific JavaScript functionality must be maintained here. Only `.js` files belong in this folder; HTML belongs in `shared/components/`.
- 
-Do not create additional JavaScript directories inside individual features.
- 
-Header and Footer must have a single canonical implementation to maintain consistency across the website.
- 
-Important: Static HTML does not automatically include another HTML file. The project must explicitly implement a component inclusion strategy (open decision, see section 13). Until one is approved, the header lives inline in `index.html` and `shared/components/header.html` is the copy to keep in sync.
- 
-A lightweight JavaScript partial loader may be used if necessary. However, its complexity and dependencies must remain minimal. A static-site generator can be considered later if production requirements justify it.
- 
+
+- `components/`: `header.html`, `footer.html` (single canonical copy each).
+- `css/`: `header.css`, `footer.css`, `components.css`.
+- `js/`: only `.js` files, each documented with purpose and dependent pages.
+
 ### 3.5 styles/
- 
-Contains global visual foundations.
- 
-- `global.css`: Global styles, resets, and common layout rules.
-- `typography.css`: Font definitions and global typographic rules.
-- `variables.css`: Brand colors, design tokens, and reusable visual values.
-Global styles must not contain presentation rules that belong exclusively to a specific feature or shared component.
- 
-The design system must remain consistent across all pages.
- 
+
+- `variables.css`: design tokens (colors, fonts, spacing). Loaded first on every page.
+- `global.css`, `typography.css`: reserved; currently empty and not linked. Link them only when they hold real rules.
+
 ### 3.6 docs/
- 
-Contains the project's technical and visual documentation.
- 
-- `architecture.md`: Official technical architecture and organizational rules.
-- `design-system.md`: Official visual identity, colors, typography, and UI/UX guidelines.
-- `notes.md`: Development notes and pending decisions.
-- `references/`: Supporting documents and visual references.
-Documentation must be updated when important architectural decisions change.
- 
+
+Technical documentation. Update it when an architectural decision changes.
+
 ---
- 
-## 4. JavaScript Policy — Minimal JavaScript Approach
- 
-MUNIO XVII follows a **Minimal JavaScript** philosophy.
- 
-The primary objective is to reduce technical complexity, external dependencies, and debugging difficulties.
- 
-The project prioritizes native HTML5 and CSS3 functionality whenever possible.
- 
-### 4.1 Priority Order
- 
-When implementing a feature, follow this order:
- 
-1. Native HTML: Use built-in HTML elements and browser functionality.
-2. CSS3: Use CSS for visual effects, layouts, transitions, and responsive behavior.
-3. JavaScript: Introduce JavaScript only when HTML and CSS cannot reasonably achieve the required functionality.
-### 4.2 JavaScript Organization
- 
-All JavaScript files must be centralized in:
- 
-`shared/js/`
- 
-This directory is responsible for both global and feature-specific JavaScript functionality.
- 
-Do not create:
- 
-- `pages/home/home.js`
-- `pages/gallery/gallery.js`
-- `pages/committees/committees.js`
-- Other feature-specific JavaScript directories.
-JavaScript must not be introduced without a clear functional requirement.
- 
-### 4.3 Development Restrictions
- 
-- Avoid unnecessary JavaScript libraries.
-- Avoid unnecessary external dependencies.
-- Prefer simple, readable implementations.
-- Avoid complex abstractions and excessive code.
-- Document the purpose of every JavaScript file.
-- Identify which pages depend on each JavaScript implementation.
-- Keep functionality easy to inspect and debug.
-### 4.4 Main Objective
- 
-The website must remain maintainable by developers with limited JavaScript experience.
- 
-Code readability and predictability are more important than architectural sophistication.
- 
-**Core principle: If HTML or CSS can solve the problem effectively, do not introduce JavaScript.**
- 
+
+## 4. JavaScript Policy — Minimal JavaScript
+
+Priority order: **1) native HTML, 2) CSS, 3) JavaScript**. If HTML or CSS can solve it, do not add JavaScript.
+
+All JS lives in `shared/js/`. Do not create `pages/<feature>/<feature>.js`. Avoid libraries and dependencies; the only external script is the popover polyfill (pinned version, section 5.3).
+
+Current JS and what depends on it:
+
+| File | Purpose | Pages |
+|---|---|---|
+| `include.js` | Loads header and footer into the slots | Every page |
+| `header.js` | Popover polyfill for old browsers + page search | Every page (after `components:loaded`) |
+| `hero-video.js` | Hero image → video (inactive) | Home (commented out) |
+
+The website must stay maintainable by developers with limited JavaScript experience.
+
 ---
- 
-## 5. Header and Footer Architecture
- 
-Header and Footer are global website components.
- 
-Their canonical implementations belong in:
- 
-- `shared/components/header.html`
-- `shared/components/footer.html`
-Their styles belong in `shared/css/`.
- 
-Their JavaScript functionality, if required, belongs in `shared/js/`.
- 
-### Header responsibilities
- 
-The Header contains the global navigation and shared actions.
- 
-The approved navigation includes:
- 
-- Home
-- Gallery
-- How to MUN
-- About Us
-- Committees
-- Search
-- Sign In
-Social media links must preserve their approved responsive behavior.
- 
-### Footer responsibilities
- 
-The Footer contains shared website information, contact details, and social media links.
- 
-### Home-specific elements
- 
-The Home Hero is not a global component.
- 
-It belongs exclusively to the Home feature and must not be included inside the shared Header implementation.
- 
-Changes to shared components must be checked across every affected page.
- 
+
+## 5. Header, Footer and Component Loading
+
+### 5.1 Canonical components
+
+- `shared/components/header.html` and `footer.html`: one copy each.
+- Styles in `shared/css/`. Behavior in `shared/js/`.
+- The Home Hero is **not** a shared component; it belongs to Home.
+
+### 5.2 How a page includes them (adopted: loader, option A)
+
+Every page has two empty slots and a `data-root` attribute on `<html>`:
+
+```html
+<html lang="en" data-root="./">          <!-- root pages -->
+<html lang="en" data-root="../../">      <!-- pages/<feature>/ pages -->
+...
+<div data-include="header"></div>
+...
+<div data-include="footer"></div>
+<script src="shared/js/include.js" defer></script>
+```
+
+`include.js`:
+
+1. Reads `data-root` from `<html>`.
+2. `fetch`es `shared/components/header.html` and `footer.html`.
+3. Replaces every `{{root}}` in the fetched HTML with the `data-root` value, so the same links work from any depth.
+4. Replaces each slot with the component (`outerHTML`), marks the current page with `aria-current="page"`, and dispatches `components:loaded`.
+
+Consequences:
+
+- **It needs a server.** Opening a page with `file://` fails (fetch is blocked). Use VS Code Live Preview or `python -m http.server`.
+- Components are inserted by JavaScript, so any script that touches them (`header.js`) waits for `components:loaded`.
+- All links inside components must be written as `{{root}}path/to/page.html`, never `/path` and never `../`.
+
+### 5.3 Header behavior
+
+- Sticky. Logo (Home) left · Gallery · How to MUN · About Us · Committees centered, separated by dots · search + Sign In right.
+- Mobile menu and search use the native `popover` attribute. `header.js` loads `@oddbird/popover-polyfill@0.7.3` (pinned) for older browsers.
+- Instagram and TikTok are inside the mobile menu and in the footer, not in the desktop header.
+
+### 5.4 Footer
+
+Two halves (MUNIO | Instituto Oriente), each with its logo, social links and privacy notice, on a navy background. The MUNIO privacy notice is temporarily commented out and replaced by a "404 page (temporary)" link.
+
 ---
- 
+
 ## 6. Asset Management Rules
- 
-The project uses a Hybrid Asset Architecture.
- 
-### Global resources
- 
-Store resources used by multiple features in `assets/`.
- 
-Examples:
- 
-- Official logos.
-- Shared brand elements.
-- General illustrations.
-- Reusable backgrounds.
-### Feature-specific resources
- 
-Store exclusive images inside the corresponding feature.
- 
-Examples:
- 
-- `pages/home/images/`
-- `pages/about-us/images/`
-### Asset rules
- 
+
+Hybrid assets: shared in `assets/`, exclusive in `pages/<feature>/images/`.
+
 1. Do not duplicate identical images.
-2. Do not move feature-specific images into global assets without justification.
-3. Preserve original files during migration.
-4. Use descriptive filenames.
-5. Preserve appropriate image extensions.
-6. Verify image references after moving resources.
+2. Use descriptive kebab-case names.
+3. Verify references after moving files.
+4. **Size limit:** compress before adding to the repo. WebP or JPG, about 1600 px on the long side, 100–300 KB. Prefer SVG for logos and icons.
+5. **Never commit** originals, PSD/AI, videos or PDFs. They stay in `zz_moodboard/` or an external drive.
+6. Every `<img>` has `alt`, `width`, `height`, and `loading="lazy"` unless it is above the fold.
+
+Why: the first push was 402 MiB because originals were tracked. After moving them to ignored folders and resetting history, the repository weighs under 200 KiB. Keep it that way.
+
 ---
- 
+
 ## 7. CSS Architecture
- 
-CSS follows the same responsibility boundaries as the HTML architecture.
- 
-**Global CSS:**
- 
-Located in `styles/`.
- 
-Responsible for visual foundations shared throughout the website.
- 
-**Shared component CSS:**
- 
-Located in `shared/css/`.
- 
-Responsible for Header, Footer, and reusable component presentation.
- 
-**Feature CSS:**
- 
-Located inside the corresponding feature directory.
- 
-Responsible for the presentation of individual website sections.
- 
-Avoid unnecessary style duplication and conflicting selectors.
- 
-Global design tokens must be maintained in `styles/variables.css`. Header and Hero styles that are currently inline in `index.html` move to `shared/css/header.css` and `pages/home/home.css`, and their color and font values move to `variables.css`.
- 
+
+| Layer | Location | Responsibility |
+|---|---|---|
+| Tokens | `styles/variables.css` | Colors, fonts, gutter, max width, header height |
+| Shared components | `shared/css/` | Header, footer, buttons and other reusable UI |
+| Feature | `pages/<feature>/<feature>.css` | Only that page |
+
+Load order in every page `<head>`: `variables.css` → `header.css` → `footer.css` → `components.css` → page CSS.
+
+Rules:
+
+- Use tokens (`var(--munio-navy)`), never repeated hex values.
+- Do not define the same component in two files (a duplicate `.btn-primary` once caused a conflict).
+- BEM-like class names: `block__element--modifier` (`faq__item`, `site-nav__item`).
+- Mobile first; breakpoints with `min-width` in `rem` (`56rem` is the desktop switch).
+- Respect `prefers-reduced-motion` for every animation.
+
+Current tokens:
+
+```css
+--munio-navy:  #151B4F;               /* ink and accent */
+--munio-paper: #FDFCF9;               /* page background */
+--munio-muted: #4B5078;               /* secondary text */
+--munio-line:  rgb(21 27 79 / 0.32);  /* thin rules */
+--font-serif:  "Libre Caslon Text", Georgia, serif;
+--font-sans:   "Inter", system-ui, sans-serif;
+--gutter:      clamp(1rem, 4vw, 2rem);
+--max-w:       75rem;
+--header-h:    4.25rem;  /* 4.75rem from 56rem up */
+--radius-btn:  0.25rem;  /* in components.css */
+```
+
 ---
- 
+
 ## 8. Naming Conventions
- 
-The project uses `kebab-case` (lowercase words separated by hyphens) for every directory and file name.
- 
-**Why not `snake_case`:** search engines treat a hyphen as a word separator in URLs but do not treat an underscore the same way, so `how-to-mun` reads as three words and `how_to_mun` as one. Hyphens are also the web convention for URLs, they avoid confusion with underscores hidden by link underlines, and they keep one style across HTML, CSS and image names. Underscores remain acceptable inside CSS class names or JavaScript variables where a project style requires it, but not in file or folder names.
- 
-Examples:
- 
-| Element | Convention |
-|---|---|
-| Directories | `about-us/` |
-| HTML files | `about-us.html` |
-| CSS files | `about-us.css` |
-| JavaScript files | `site-navigation.js` |
-| Image files | `munio-logo.png` |
- 
-Existing filenames should not be renamed automatically during unrelated maintenance tasks.
- 
-Any renaming must include a complete reference update.
- 
-Preserve the actual filename capitalization, especially when deploying to GitHub Pages, where file paths are case-sensitive. Use lowercase for new files.
- 
-Existing names that do not follow the convention (`Logo_IO.png`, `logo_MUNIO.png`, `zz_ignore/`) are renamed only in a dedicated task, with every reference updated.
- 
+
+`kebab-case` for every folder and file (`about-us.html`, `site-navigation.js`, `munio-logo.svg`). Hyphens are the URL convention and are read as word separators.
+
+- GitHub Pages is **case-sensitive**: `Logo_IO.png` ≠ `logo_io.png`. Use lowercase for new files.
+- Renaming existing files is done in a dedicated task with every reference updated. Pending: `Logo_IO.png`, `logo_MUNIO.png`.
+- CSS classes: lowercase, hyphen and BEM underscores (`block__element`).
+
 ---
- 
-## 9. Routing and GitHub Pages
- 
-MUNIO XVII is deployed as a static website through GitHub Pages.
- 
-Every internal link and resource reference must be compatible with the repository's deployment path.
- 
-The website must not assume that the domain root is the repository root.
- 
-When modifying the directory structure, review:
- 
-- HTML navigation links.
-- CSS stylesheet references.
-- CSS image references.
-- JavaScript references.
-- Favicon references.
-- Header and Footer loading paths.
-- Links from nested pages to root-level resources.
-Relative paths must be evaluated from the location of the file that contains the reference.
- 
-The root `index.html` must remain the main entry point.
- 
-The site is published under a repository subpath (`https://liam03flores.github.io/munio17/`), so **paths that start with `/` must not be used**: they point to the domain root and break the site. Use relative paths, evaluated from the file that contains them:
- 
+
+## 9. Routing, GitHub Pages and the 404 page
+
+### 9.1 Subpath rule
+
+The site lives under `/munio17/`, not at the domain root. **Never use paths starting with `/`** in components or pages; use relative paths evaluated from the file that contains them.
+
 | From | To | Path |
 |---|---|---|
 | `index.html` | Gallery | `pages/gallery/gallery.html` |
-| `index.html` | Logo | `assets/logo-16.png` |
 | `pages/gallery/gallery.html` | Home | `../../index.html` |
-| `pages/gallery/gallery.html` | Logo | `../../assets/logo-16.png` |
 | `pages/gallery/gallery.html` | Header CSS | `../../shared/css/header.css` |
- 
-Because the same Header is used at different depths, its links need a strategy that works from the root and from `pages/<feature>/` (see section 13).
- 
-All pages must be tested both locally and after deployment.
- 
+| `header.html` (any page) | Gallery | `{{root}}pages/gallery/gallery.html` |
+
+### 9.2 Route table
+
+| Route | File | Status | Notes |
+|---|---|---|---|
+| `/` | `index.html` | Built | Home |
+| any missing URL | `404.html` | Built | Served by GitHub Pages |
+| `/pages/maintenance/maintenance.html` | `pages/maintenance/maintenance.html` | Built | "Under construction" page |
+| `/pages/gallery/gallery.html` | — | Planned | Points to maintenance for now |
+| `/pages/how-to-mun/how-to-mun.html` | — | Planned | Points to maintenance for now |
+| `/pages/about-us/about-us.html` | — | Planned | Points to maintenance for now |
+| `/pages/committees/committees.html` | — | Planned | Points to maintenance for now |
+| `/pages/register/register.html` | — | Planned | Points to maintenance for now |
+| `/pages/sign-in/sign-in.html` | — | Planned | Points to maintenance for now |
+| Privacy notice | external | Temporary | MUNIO notice commented out; school notice: `https://ioriente.edu.mx/es/privacy` |
+
+**Temporary redirection:** the links of unfinished pages (in `header.html`, `footer.html`, `index.html`) point to `pages/maintenance/maintenance.html`. When a page is built, change **only** its link (find/replace the old target). Do not create a redirect mechanism.
+
+### 9.3 How `404.html` works
+
+GitHub Pages serves `404.html` from the repository root for any URL that does not exist. The browser keeps the wrong URL (for example `/munio17/foo/bar`), so relative paths would resolve from the wrong depth. Therefore `404.html`:
+
+- has `<base href="/munio17/">` so every relative path resolves from the project root;
+- has `data-root="./"` for the include loader;
+- keeps its CSS in `pages/error-404/error-404.css`.
+
+Caveats:
+
+- Locally (Live Preview) `<base href="/munio17/">` breaks the page unless the server also serves under `/munio17/`. Comment it out for local tests, or test with the subpath trick (a symlink named `munio17` pointing to the project and `python -m http.server`).
+- With a custom domain at the root, change the base to `/`.
+- The `<base>` tag affects **every** relative URL in that file, including `#anchors`. Do not add anchor links to `404.html`.
+
+### 9.4 Testing checklist
+
+Local (server) → push → open the live URL → type a wrong URL (404) → test on a phone.
+
 ---
- 
-## 10. Development and Maintenance Rules
- 
-1. Consult this document before structural modifications.
-2. Consult `design-system.md` before visual modifications.
-3. Do not introduce unnecessary frameworks.
-4. Do not introduce JavaScript without a clear requirement.
-5. Keep all JavaScript inside `shared/js/`.
-6. Maintain a single canonical Header and Footer.
-7. Do not duplicate shared assets.
-8. Do not move files without checking their references.
-9. Do not delete files without confirming they are unused.
-10. Do not modify visual design during architecture-only migrations.
-11. Preserve existing functionality when reorganizing files.
-12. Update documentation when architectural decisions change.
-### AI Collaboration Rules
- 
-Any AI assistant working on MUNIO must:
- 
-- Inspect the existing directory structure before creating files.
-- Follow the responsibilities established in this document.
-- Avoid inventing new directories without justification.
-- Avoid introducing unnecessary JavaScript.
-- Preserve existing visual decisions.
-- Identify affected file references before moving resources.
-- Report modifications and potential problems.
-- Never assume that a file exists without checking the actual project.
+
+## 10. Git, Deploy and Maintenance Rules
+
+### 10.1 Publishing
+
+```text
+git status
+git add .
+git commit -m "feat(home): ..."
+git push
+```
+
+GitHub Pages rebuilds in about a minute. No more `--force`: history was reset once and is now stable.
+
+### 10.2 Size guard
+
+- `git count-objects -vH` before pushing. The repository should stay in the KiB–low MiB range.
+- `git check-ignore` does not report files that are already tracked; use `git check-ignore --no-index -v <path>`. To untrack: `git rm -r --cached .` and add again.
+- If PowerShell shows octal names for accented files: `git config core.quotepath false`.
+
+### 10.3 Rules
+
+1. Read this document before structural changes; read `design-system.md` before visual changes.
+2. No frameworks. No JavaScript without a clear need.
+3. One canonical header and footer.
+4. Do not move or delete files without checking references.
+5. Architecture-only migrations do not change visuals.
+6. Update documentation when decisions change.
+
+### 10.4 AI collaboration rules
+
+Any AI assistant working on MUNIO must: inspect the real tree before creating files; follow the responsibilities above; not invent folders; not add JavaScript without need; preserve existing visual decisions; report affected references; and never assume a file exists without checking.
+
 ---
- 
-## 11. Future Architecture Changes
- 
-The current architecture is intentionally simple.
- 
-Additional tools or technologies may be introduced only when a concrete requirement justifies them.
- 
-Potential future considerations:
- 
-- Static-site generation for shared HTML components.
-- Improved asset optimization.
-- More structured documentation.
-- Automated link validation.
-- Additional features when the website requires them.
-These are future possibilities, not current project requirements.
- 
-Any significant architectural change must be documented and approved before implementation.
- 
+
+## 11. Building a New Page (checklist)
+
+1. Create `pages/<name>/<name>.html` and `pages/<name>/<name>.css`.
+2. In `<html>` set `lang="en"` and `data-root="../../"`.
+3. In `<head>`: Google Fonts link (Inter + Libre Caslon Text, one request), then `variables.css`, `header.css`, `footer.css`, `components.css`, page CSS (relative paths with `../../`).
+4. `<body>`: `<div data-include="header"></div>`, `<main id="main">`, `<div data-include="footer"></div>`, then `<script src="../../shared/js/include.js" defer></script>` and `header.js`.
+5. Add a skip link and a single `<h1>`.
+6. Replace the page's link in header, footer and Home (from maintenance to the real file).
+7. Add the route to the table in section 9.2.
+8. Test in a server, on a phone width (360 px) and in the live URL.
+
 ---
- 
-## 12. Final Architecture Principles
- 
-MUNIO XVII is built around the following priorities:
- 
-1. **Simplicity:** Avoid unnecessary technical complexity.
-2. **Maintainability:** Every file must have a clear responsibility.
-3. **Independence:** Each feature must manage its own resources.
-4. **Consistency:** Shared components and global styles must remain centralized.
-5. **Minimal JavaScript:** Prefer native HTML and CSS.
-6. **Predictability:** File locations and references must be easy to understand.
-7. **Stability:** Structural changes must not unintentionally modify the website's appearance or functionality.
+
+## 12. Future Architecture Changes
+
+Possible, only with a concrete need: static-site generation for shared HTML, image optimization pipeline, automated link validation, Open Graph tags for link previews, a custom domain. Any significant change is documented and approved first.
+
+Principles: **simplicity, maintainability, independence, consistency, minimal JavaScript, predictability, stability.**
+
 ---
- 
-**Architecture status:** Approved.
- 
-**Technical source of truth:** `docs/architecture.md`
- 
-**Visual source of truth:** `docs/design-system.md`
- 
+
+## 13. Open Decisions and Pending Items
+
+**Resolved since v1.1:** component inclusion (loader adopted); header/hero CSS split (done); `zz_ignore/` replaced by three ignored `zz_*` folders; `shared/js/` cleaned (JS only); 404 and maintenance pages built.
+
+**Pending:**
+
+| Item | Note |
+|---|---|
+| Hero video location | Create `pages/home/videos/` only when a video exists and is compressed |
+| Logo for MUNIO XVII | `logo-16.png` is provisional; request the vector logo (SVG) |
+| Rename `Logo_IO.png`, `logo_MUNIO.png` | Dedicated task, update references, mind case |
+| Pages not built | gallery, how-to-mun, about-us, committees, register, sign-in |
+| `typography.css`, `global.css` | Empty; fill or delete |
+| Sponsors marquee | No pause control (WCAG 2.2.2); pauses only on hover/focus |
+| Open Graph tags | Link previews for WhatsApp/Instagram |
+| Backup of `zz_*` folders | Not in GitHub; keep an external copy |
+| Placeholders | `mun@example.com`, `[##]` speakers, "XXX MXN", "More than 400 delegates", sponsor logos, hero and 404 images, "16 years" in the Vision text |
+
+---
+
+**Technical source of truth:** `docs/architecture.md` · **Visual source of truth:** `docs/design-system.md`
+
 **Primary rule:** Keep the architecture simple, organized, and understandable by every developer contributing to MUNIO XVII.
- 
+
 ---
- 
-## 13. Open Decisions and Pending Cleanup
- 
-These items were found when reviewing version 1.0 and still need action in the project.
- 
-**Cleanup in the project (files that must be moved or renamed):**
- 
-2. Check `assets/` for duplicates between the root and `logos/`. A logo must exist once.
-3. Rename `Logo_IO.png` and `logo_MUNIO.png` to `logo-io.png` and `logo-munio.png` in a dedicated task, updating all references. Mind capitalization on GitHub Pages.
-4. Add `zz_ignore/` to `.gitignore` if it must not be published.
-5. Create the pages that the Header already links to: `about-us.html`, `committees.html`, `gallery.html`, `how-to-mun.html`, `sign-in.html`.
-**Decisions to approve:**
- 
-| Decision | Options | Recommendation |
+
+## Changelog
+
+| Version | Date | Change |
 |---|---|---|
-| Header and Footer inclusion | Inline copies; a small JavaScript loader (`fetch`); a static-site generator | Start with inline copies (zero JavaScript) while there are few pages; adopt a loader or generator only if keeping copies in sync becomes a problem |
-| Hero video location | `pages/home/images/`; new `pages/home/videos/` | A `videos/` folder, documented here, to keep image and video assets apart |
-| Header and Hero CSS | Inline in `index.html`; split into `shared/css/header.css` and `pages/home/home.css` | Split once Home is finished, with tokens in `styles/variables.css` |
-| Logo for MUNIO XVII | Keep provisional `logo-16.png`; add the 17th-edition logo to `assets/logos/` | Replace with the official vector logo when available |
- 
- 
+| 1.2 | 2026-11-21 | New tree (no `zz_ignore`; three ignored `zz_*` folders); routes table; loader adopted and documented; `404.html` and `<base>` strategy; maintenance page; asset size rules; git and deploy procedure; new-page checklist; open decisions refreshed |
+| 1.1 | 2026-11-17 | Subpath rule, kebab-case rationale, open decisions section |
+| 1.0 | 2026-11-14 | Initial approved architecture |

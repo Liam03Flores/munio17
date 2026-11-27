@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-root="../../">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | MUNIO XVII</title>
+  <meta name="description" content="Meet the students behind MUNIO XVII: our mission, the High Command and the teams that run the model.">
+  <meta name="theme-color" content="#FDFCF9">
+  <link rel="icon" href="../../assets/logo-window.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap">
+
+  <!-- Orden: tokens -> base -> componentes globales -> página. Rutas desde pages/about-us/ -->
+  <link rel="stylesheet" href="../../styles/variables.css">
+  <link rel="stylesheet" href="../../styles/global.css">
+  <link rel="stylesheet" href="../../shared/css/header.css">
+  <link rel="stylesheet" href="../../shared/css/components.css">
+  <link rel="stylesheet" href="../../shared/css/footer.css">
+  <link rel="stylesheet" href="about-us.css">
+
+  <script src="../../shared/js/include.js" defer></script>
+  <script src="../../shared/js/header.js" defer></script>
+  <script src="../../shared/js/about-us.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div data-include="shared/components/header.html" class="header-slot"></div>
+
+  <main id="main" class="about">
+
+    <!-- 1. What is MUNIO -->
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="about__wrap">
+        <h1 id="intro-title" class="intro__title">What is MUNIO?</h1>
+        <div class="intro__grid">
+          <p class="intro__text">MUNIO (Model United Nations at Instituto Oriente) is an academic experience that brings together students from different schools to debate, negotiate and build solutions to the world's most important challenges. Through dialogue, research and teamwork, we learn to think globally and act locally, just like real diplomats.</p>
+          <img class="intro__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23DDE1F0'/%3E%3Ctext x='600.0' y='400.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3EMUNIO photo%3C/text%3E%3C/svg%3E" alt="Delegates at a MUNIO session (placeholder photo)" width="1200" height="800" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. High Commands: portada de video + texto de bienvenida, y 3 fotos 2:3 con texto al pasar el cursor.
+         JS: shared/js/about-us.js (video y toque en pantallas táctiles) -->
+    <section class="leaders about__wrap" aria-labelledby="leaders-title" data-leaders>
+      <h2 id="leaders-title" class="title">High Commands</h2>
+
+      <div class="leaders__intro">
+        <div class="hcover" data-video="">
+          <img class="hcover__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Crect width='1600' height='900' fill='%23DDE1F0'/%3E%3Ctext x='800.0' y='450.0' text-anchor='middle' font-family='serif' font-size='54' fill='%23151B4F'%3EVideo cover%3C/text%3E%3C/svg%3E" alt="Cover of the High Commands introduction video (placeholder photo)" width="1600" height="900" decoding="async">
+          <button class="hcover__play" type="button" aria-label="Play the High Commands introduction video"><svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true" focusable="false"><path d="M8.5 6v12l10-6z" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg></button>
+          <p class="hcover__note" role="status" hidden>Introduction video coming soon.</p>
+        </div>
+        <div class="leaders__welcome">
+          <p>We are the MUNIO's High Commands, we lead the model from the first idea to the closing ceremony. Together with our teams, we work all year so that every delegate lives three days of debate, friendship and learning.</p>
+        </div>
+      </div>
+
+      <ul class="hcards">
+          <li class="hcard" tabindex="0">
+            <img class="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 900'%3E%3Crect width='600' height='900' fill='%23DDE1F0'/%3E%3Ctext x='300.0' y='450.0' text-anchor='middle' font-family='serif' font-size='36' fill='%23151B4F'%3ESecretary General%3C/text%3E%3C/svg%3E" alt="Full Name One, Secretary General (placeholder photo)" width="600" height="900" loading="lazy" decoding="async">
+            <div class="hcard__info"><p>I am discplined, talkative, outgoing, determined, committed, and empathetic. I love traveling around the world, laughing , and interacting with people, and I ejoy taking on challenges.</p></div>
+            <p class="hcard__caption"><span class="hcard__role">Secretary General</span><span class="hcard__name">Fernanda García Dávila</span></p>
+          </li>
+          <li class="hcard" tabindex="0">
+            <img class="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 900'%3E%3Crect width='600' height='900' fill='%23DDE1F0'/%3E%3Ctext x='300.0' y='450.0' text-anchor='middle' font-family='serif' font-size='36' fill='%23151B4F'%3ESecretary for Committees%3C/text%3E%3C/svg%3E" alt="Full Name Two, Secretary for Committees (placeholder photo)" width="600" height="900" loading="lazy" decoding="async">
+            <div class="hcard__info"><p>I am driven by challenge, energized by people, and always ready to find the humor in any moment. Sports have taught me discipline, resilience, and the value of pushing beyond what feels possible. As part of MUNIO, I aspire to lead my chairs and contribute to a model that grows into somehting truly meaningfull. <br> <br> "If you want to be the best, you have to do things that other people are not willing to do"</p></div>
+            <p class="hcard__caption"><span class="hcard__role">Secretary for Committees</span><span class="hcard__name">Agustín Sanchez Peláez</span></p>
+          </li>
+          <li class="hcard" tabindex="0">
+            <img class="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 900'%3E%3Crect width='600' height='900' fill='%23DDE1F0'/%3E%3Ctext x='300.0' y='450.0' text-anchor='middle' font-family='serif' font-size='36' fill='%23151B4F'%3ESecretary for Logistics%3C/text%3E%3C/svg%3E" alt="Full Name Three, Secretary for Logistics (placeholder photo)" width="600" height="900" loading="lazy" decoding="async">
+            <div class="hcard__info"><p>I am a cheerful, curious, grateful, and loyal person. I firmly believe in empathetic leadership and I am confident of who I am. I face life with dischipline, creativity, and a sense of justice. I am noble and committed. I love singing and dancing, I love Mexico, and my family. <br><br> If you act with love and passion, life smiles at you</p></div>
+            <p class="hcard__caption"><span class="hcard__role">Secretary for Logistics</span><span class="hcard__name">Ana Victoria Corona Neumaier</span></p>
+          </li>
+      </ul>
+    </section>
+
+    <!-- 3. Our Mission: solo texto, centrado -->
+    <section class="mission" aria-labelledby="mission-title">
+      <div class="about__wrap">
+        <h2 id="mission-title" class="title">Our Mission</h2>
+        <p class="mission__text">MUNIO seeks to transform the world through youth by fostering debate, discipline, empathy and teamwork. Through simulated United Nations debates, delegates raise awareness about global challenges and propose solutions. In this way, MUNIO goes beyond academics and inspires future generations.</p>
+      </div>
+    </section>
+
+    <!-- 4. Sub-High Commands: carrusel -->
+    <section class="subhc" aria-labelledby="subhc-title" data-carousel>
+      <div class="about__wrap">
+        <div class="subhc__head">
+          <h2 id="subhc-title" class="title">Sub-High Commands</h2>
+        </div>
+        <div class="subhc__stage">
+        <ul class="subhc__track" tabindex="0" aria-label="Sub-High Commands, scrollable">
+        <li class="slide" aria-label="1 of 5">
+          <img class="slide__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23DDE1F0'/%3E%3Ctext x='400.0' y='500.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3EDesign photo%3C/text%3E%3C/svg%3E" alt="Design team (placeholder photo)" width="800" height="1000" loading="lazy" decoding="async">
+          <div class="slide__body">
+            <h3 class="slide__team">Design</h3>
+            <p class="slide__name">Alejandro González Pérez, Isabel Garcias Salmones Jean and Damián Anaya Sosa</p>
+            <p class="slide__text">Builds the visual identity of the model: posters, social media, the website and everything delegates see during the three days.</p>
+          </div>
+        </li>
+        <li class="slide" aria-label="2 of 5">
+          <img class="slide__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23DDE1F0'/%3E%3Ctext x='400.0' y='500.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3ETreasury photo%3C/text%3E%3C/svg%3E" alt="Treasury team (placeholder photo)" width="800" height="1000" loading="lazy" decoding="async">
+          <div class="slide__body">
+            <h3 class="slide__team">Special Events</h3>
+            <p class="slide__name">Elena Dionne Murillo and Valeria Cid Meléndez</p>
+            <p class="slide__text">Designs the moments between debates: the opening ceremony, socials and every activity that makes the model memorable.</p>
+          </div>
+        </li>
+        <li class="slide" aria-label="3 of 5">
+          <img class="slide__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23DDE1F0'/%3E%3Ctext x='400.0' y='500.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3EStaff photo%3C/text%3E%3C/svg%3E" alt="Staff team (placeholder photo)" width="800" height="1000" loading="lazy" decoding="async">
+          <div class="slide__body">
+            <h3 class="slide__team">Foreign Affairs</h3>
+            <p class="slide__name">Ana Camila Medellin Cortina and Carlos Solís Valderrábano</p>
+            <p class="slide__text">Connects MUNIO with other schools, delegations and guests, and handles invitations, protocol and outside communication.</p>
+          </div>
+        </li>
+        <li class="slide" aria-label="4 of 5">
+          <img class="slide__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23DDE1F0'/%3E%3Ctext x='400.0' y='500.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3EForeign Affairs photo%3C/text%3E%3C/svg%3E" alt="Foreign Affairs team (placeholder photo)" width="800" height="1000" loading="lazy" decoding="async">
+          <div class="slide__body">
+            <h3 class="slide__team">Staff</h3>
+            <p class="slide__name">Loretta Moro Barba and Rafael Muñozcano Garrido</p>
+            <p class="slide__text">Runs the logistics on the ground: rooms, schedules and materials, and manage the staff team that supports chairs and delegates from the first session to the closing.</p>
+          </div>
+        </li>
+        <li class="slide" aria-label="5 of 5">
+          <img class="slide__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%23DDE1F0'/%3E%3Ctext x='400.0' y='500.0' text-anchor='middle' font-family='serif' font-size='48' fill='%23151B4F'%3ESpecial Events photo%3C/text%3E%3C/svg%3E" alt="Special Events team (placeholder photo)" width="800" height="1000" loading="lazy" decoding="async">
+          <div class="slide__body">
+            <h3 class="slide__team">Treasury</h3>
+            <p class="slide__name">Natalia García Rubio and José Agustin Carrera Vega</p>
+            <p class="slide__text">Plans the budget, manages registration fees and sponsorships, and makes sure every peso of the event is accounted for.</p>
+          </div>
+        </li>
+        </ul>
+        <div class="subhc__controls">
+          <div class="subhc__btns">
+            <button class="subhc__btn" type="button" data-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg></button>
+            <button class="subhc__btn" type="button" data-next aria-label="Next slide"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg></button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-include="shared/components/footer.html" class="footer-slot"></div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* pages/about-us/about-us.css
+   Estilos exclusivos de About Us. Solo tokens de styles/variables.css.
+   Reglas de M_17_Design.md sección 8: sin degradados, sin emojis, sin 3 tarjetas iguales,
+   sin etiquetas sobre titulares, sin animaciones atadas al scroll. Fuentes: var(--font-serif) / var(--font-sans). */
+
+.about { font-family: var(--font-serif); color: var(--munio-navy); }
+.about__wrap { inline-size: min(100% - 2 * var(--gutter), var(--max-w)); margin-inline: auto; }
+.about p { margin: 0; line-height: 1.65; }
+.about img { display: block; inline-size: 100%; object-fit: cover; border-radius: var(--radius-btn); }
+.title { margin: 0 0 1rem; font: 400 clamp(1.875rem, 4.5vw, 3rem)/1.1 var(--font-serif); }
+
+/* ---------- 1. What is MUNIO (titular centrado; abajo texto a la izquierda y foto a la derecha) ---------- */
+.intro { padding-block: clamp(1.25rem, 3vw, 2.5rem); background: rgb(21 27 79 / 0.05); }
+.intro__title { margin: 0 0 clamp(1.5rem, 4vw, 2.5rem); font: 400 clamp(2.75rem, 7vw, 4.75rem)/1.05 var(--font-serif); letter-spacing: -0.01em; text-align: center; }
+.intro__grid { display: grid; gap: 1.75rem; align-items: center; }
+.intro__text { max-inline-size: 36rem; font-size: clamp(1.0625rem, 1.8vw, 1.25rem); color: var(--munio-muted); text-align: start; }
+.intro__photo { aspect-ratio: 16 / 9; block-size: auto; }
+@media (min-width: 48rem) {
+  .intro__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); }
+}
+
+/* ---------- 2. High Commands ---------- */
+.leaders { padding-block: clamp(3rem, 8vw, 5.5rem); }
+.leaders .title { margin-block-end: clamp(1.25rem, 3vw, 2rem); }
+
+/* Portada de video (izquierda) + texto de bienvenida (derecha) */
+.leaders__intro { display: grid; gap: 1.5rem; align-items: center; margin-block-end: clamp(2rem, 5vw, 3.5rem); }
+.hcover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 0.125rem; background: var(--munio-navy); }
+.hcover__img { position: absolute; inset: 0; block-size: 100%; border-radius: 0; }
+.hcover video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; background: var(--munio-navy); }
+.hcover::after { content: ""; position: absolute; inset: 0; background: rgb(21 27 79 / 0.25); pointer-events: none; }
+.hcover__play {
+  position: absolute; z-index: 1; inset: 0; margin: auto; display: grid; place-items: center;
+  inline-size: 7rem; block-size: 7rem; padding: 0 0 0 0.4rem; border: 0; background: none;
+  color: var(--munio-paper); cursor: pointer; transition: color 0.2s ease;
+}
+.hcover__play svg { inline-size: 6rem; block-size: 6rem; }
+.hcover__play:hover { color: var(--munio-navy); }
+.hcover__play:focus-visible { outline: 2px solid var(--munio-paper); outline-offset: 2px; }
+.hcover__note { position: absolute; z-index: 1; inset-inline: 0; inset-block-end: 0; padding: 0.75rem 1rem; background: var(--munio-navy); color: var(--munio-paper); text-align: center; }
+.leaders__welcome { display: grid; gap: 1rem; max-inline-size: 34rem; font-size: clamp(1.1875rem, 2vw, 1.5rem); line-height: 1.6; }
+@media (min-width: 48rem) {
+  .leaders__intro { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4rem); }
+}
+
+/* 3 fotos 2:3: puesto y nombre dentro de la imagen; al pasar el cursor, foco o toque aparece la información.
+   Capa de color sólido (sin degradado) para que las letras se lean sobre cualquier foto */
+/* Fotos de los High Commands (proporción 6:7, esquinas apenas redondeadas).
+   Nombre y puesto dentro de la imagen, sin fondo ni capa. Color de las letras: cambia solo --hc-text
+   (azul MUNIO: var(--munio-navy) | negro: #000 | blanco: var(--munio-paper)).
+   Móvil: una debajo de otra (feed); la información se abre con un toque */
+.hcards { --hc-text: var(--munio-navy); display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.hcard { position: relative; aspect-ratio: 6 / 7; overflow: hidden; border-radius: 0.125rem; cursor: pointer; }
+.hcard img { position: absolute; inset: 0; block-size: 100%; border-radius: 0; }
+.hcard:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 3px; }
+
+.hcard__caption { position: absolute; z-index: 2; inset-inline: 0; inset-block-end: 0; display: grid; gap: 0.2rem; padding: 1.5rem; color: var(--hc-text); transition: color 0.3s ease; }
+.hcard__name { order: 1; font: 400 clamp(1.375rem, 2.2vw, 1.625rem)/1.2 var(--font-serif); }   /* nombre primero, puesto después (sin importar el orden del HTML) */
+.hcard__role { order: 2; font: 400 1rem/1.3 var(--font-sans); }
+
+/* Información: capa de color sólido que aparece con hover (escritorio), toque (móvil) o teclado; letras claras sobre la capa */
+.hcard__info {
+  position: absolute; z-index: 1; inset: 0; display: flex; align-items: center; padding: 1.5rem 1.5rem 6rem;
+  background: rgb(21 27 79 / 0.94); color: var(--munio-paper); opacity: 0; transition: opacity 0.3s ease;
+}
+.hcard__info p { font-size: 1.0625rem; line-height: 1.55; }
+.hcard.is-open .hcard__info, .hcard:focus-visible .hcard__info { opacity: 1; }   /* el clic con mouse no la deja abierta */
+.hcard.is-open .hcard__caption, .hcard:focus-visible .hcard__caption { color: var(--munio-paper); }
+
+/* Escritorio: 3 en fila, el Secretary General (1.º en la jerarquía) en medio */
+@media (min-width: 48rem) {
+  .hcards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hcard { cursor: default; }
+  .hcard:nth-child(1) { order: 2; }
+  .hcard:nth-child(2) { order: 1; }
+  .hcard:nth-child(3) { order: 3; }
+  .hcard__info p { font-size: clamp(0.9375rem, 1.3vw, 1.0625rem); }
+}
+@media (hover: hover) {
+  .hcard:hover .hcard__info { opacity: 1; }
+  .hcard:hover .hcard__caption { color: var(--munio-paper); }
+}
+
+/* ---------- 3. Our Mission (solo texto, centrado) ---------- */
+.mission { padding-block: clamp(3.5rem, 9vw, 7rem); background: rgb(21 27 79 / 0.05); text-align: center; }
+.about .mission__text { max-inline-size: 44rem; margin-inline: auto; font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.7; }
+
+/* ---------- 4. Sub-High Commands (carrusel) ---------- */
+.subhc { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.subhc__head { margin-block-end: clamp(2rem, 5vw, 3.5rem); max-inline-size: 36rem; }
+.subhc__head p { color: var(--munio-muted); font-size: 1.0625rem; }
+
+.subhc__stage { position: relative; }
+.subhc__track {
+  display: flex; gap: 0.75rem; margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.subhc__track::-webkit-scrollbar { display: none; }
+.subhc__track:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 4px; }
+
+/* Móvil: una slide completa y la mitad de la siguiente (ancho = (contenedor - gap) / 1.5); imagen arriba y debajo los nombres */
+.slide { flex: 0 0 calc((100% - 0.75rem) / 1.5); display: grid; gap: 0.6rem; align-content: start; scroll-snap-align: start; }
+.slide__photo { aspect-ratio: 4 / 5; block-size: auto; }
+.slide__team { margin: 0; font: 400 1.125rem/1.15 var(--font-serif); }
+.slide__name { margin-block-start: 0.15rem; font-size: 0.875rem; font-style: italic; color: var(--munio-muted); }
+.slide__text { display: none; }
+
+/* Escritorio: 2 slides a la vez; cada slide = imagen a la izquierda, texto a la derecha */
+@media (min-width: 48rem) {
+  .subhc__track { gap: 2.5rem; }
+  .slide { flex-basis: calc((100% - 2.5rem) / 2); grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 1.5rem; align-items: end; }
+  .slide__team { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+  .slide__name { font-size: 1.0625rem; }
+  .slide__text { display: block; margin-block-start: 0.9rem; padding-block-start: 0.9rem; border-block-start: 1px solid var(--munio-line); font-size: 1rem; color: var(--munio-muted); }
+}
+
+/* Flechas. Móvil: ligeras, a los costados y centradas con las imágenes (ancho de slide = (100vw - 2 gutters - gap) / 1.5; alto de imagen = ancho × 1.25) */
+.subhc__controls { position: absolute; inset-block-start: calc((100vw - 2 * var(--gutter) - 0.75rem) / 1.5 * 0.625 - 1.125rem); inset-inline: 0; block-size: 0; pointer-events: none; }
+.subhc__btns { display: block; }
+.subhc__btn { position: absolute; display: grid; place-items: center; inline-size: 2.25rem; block-size: 2.25rem; padding: 0; border: 0; border-radius: var(--radius-btn); background: rgb(253 252 249 / 0.85); color: var(--munio-navy); cursor: pointer; pointer-events: auto; }
+.subhc__btn[data-prev] { inset-inline-start: 0.25rem; }
+.subhc__btn[data-next] { inset-inline-end: 0.25rem; }
+.subhc__btn svg { inline-size: 1.25rem; block-size: 1.25rem; }
+.subhc__btn:focus-visible { outline: 2px solid var(--munio-navy); outline-offset: 2px; }
+.subhc__btn:disabled { opacity: 0; pointer-events: none; }
+
+/* Escritorio: flechas con contorno, debajo del carrusel, a la derecha */
+@media (min-width: 48rem) {
+  .subhc__controls { position: static; display: flex; justify-content: flex-end; block-size: auto; margin-block-start: clamp(1.25rem, 3vw, 2rem); pointer-events: auto; }
+  .subhc__btns { display: flex; gap: 0.5rem; }
+  .subhc__btn { position: static; inline-size: 2.75rem; block-size: 2.75rem; border: 1px solid var(--munio-navy); background: transparent; }
+  .subhc__btn svg { inline-size: 1.5rem; block-size: 1.5rem; }
+  .subhc__btn:hover:not(:disabled) { background: var(--munio-navy); color: var(--munio-paper); }
+  .subhc__btn:disabled { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hcard__info, .hcard__caption { transition: none; }
+}
